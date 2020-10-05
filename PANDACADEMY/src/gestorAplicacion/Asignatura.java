@@ -109,7 +109,7 @@ public class Asignatura {
         }
     } */
 
-    public void MostrarNotas() {
+    public void mostrarNotas() {
         System.out.println("Tus notas de " + this.nombre + "son: ");
         Calificacion n = this.getCalificaciones();
         for(int i = 0; n.getNotas().size(); i++){
@@ -117,12 +117,12 @@ public class Asignatura {
         }
     }
 
-    /*public double Promedio(){
+    /*public double promedio(){
         Calificacion n = this.getCalificaciones();
 
     }*/
 
-    public void MostrarHorario() {
+    public void mostrarHorario() {
         for(int i = 0; i < this.getHorarios().size(); i++){
             System.out.println(this.getHorario(i).toString());
         }

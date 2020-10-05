@@ -19,19 +19,24 @@ public class Estudiante extends Persona {
 		
 	}
 	
-	public float getPAPA() {
-		
-	}
+	/*public float getPAPA() {
+		float total = 0;
+		int totalCreditos = 0;
+		for(int i = 0; i < asignaturas.size(); i++) {
+			total += (asignaturas.get(i).promedio()) * (asignaturas.get(i).getCreditos());
+			totalCreditos += asignaturas.get(i).getCreditos()
+		}
+		return(total/totalCreditos);
+	}*/
 	
 	public void addAsignatura(Asignatura asignatura) {
 		this.asignatura.add(asignatura)
 	}
 	
-	public void PAPA() {
-		
-	}
-	
 	public Horario getHorario() {
-		
+		for(int i = 0; i < asignaturas.size(); i++) {
+			System.out.println(asignaturas.get(i).getNombre());
+			asignaturas.get(i).mostrarHorario();
+		}
 	}
 }
