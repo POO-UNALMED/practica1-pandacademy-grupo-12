@@ -28,10 +28,11 @@ public class Calificacion {
 	public void setAsignatura(Asignatura asignatura) {
 		this.asignatura = asignatura;
 	} 
-	public static int promedio() {
+	public static double promedio() {
 		double cont=0;
 		for (int i=0;i<Nota.size();i++) {
 			cont=cont + (Nota.get(i).getNota()*Nota.get(i).getPorcentaje()) ;
 		}
+		return cont;
 	}
 }

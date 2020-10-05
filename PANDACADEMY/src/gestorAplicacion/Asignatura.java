@@ -131,7 +131,7 @@ public class Asignatura {
     public void borrarHorario(Horario h) {
         int horario = this.getHorarios().indexOf(h);
         if(horario >= 0){
-            this.getHorarios().remove(horaio);
+            this.getHorarios().remove(horario);
         }
     }
 }
