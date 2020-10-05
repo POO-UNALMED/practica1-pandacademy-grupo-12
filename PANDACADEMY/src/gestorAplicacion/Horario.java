@@ -2,7 +2,7 @@ package gestorAplicacion;
 
 public class Horario {
     
-    private String dia, HoraInicio, HoraFinal;
+    private String dia, horaInicio, horaFinal;
 
     public Horario(String d, String i, String f){
         this.dia = d;
@@ -29,7 +29,7 @@ public class Horario {
     }
 
     public String toString() {
-        String horario = this.getDia() + "\n" + this.getInicio() + "\n" + this.getFinal();
+        String horario = dia + "\n" + horaInicio + "\n" + horaFinal;
         return horario;        
     }
 }
