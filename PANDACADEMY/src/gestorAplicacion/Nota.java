@@ -1,28 +1,28 @@
 package gestorAplicacion;
 import java.util.*;
 public class Nota {
-	private double porcentaje;
-	private double calificaciones;
+	private float porcentaje;
+	private float calificaciones;
 	
 	public Nota() {
 		
 	}
 	
-	public Nota(double porcentaje,double calificaciones) {
+	public Nota(float porcentaje,float calificaciones) {
 		this.calificaciones=calificaciones;
 		this.porcentaje=porcentaje;
 	}
 	
-	public double getPorcentaje() {
+	public float getPorcentaje() {
 		return porcentaje;
 	}
-	public void setPorcentaje(double porcentaje) {
+	public float setPorcentaje(double porcentaje) {
 		this.porcentaje = porcentaje;
 	}
-	public double getNota() {
+	public float getNota() {
 		return calificaciones;
 	}
-	public void setNota(double calificaciones) {
+	public void setNota(float calificaciones) {
 		this.calificaciones = calificaciones;
 	}
 	
