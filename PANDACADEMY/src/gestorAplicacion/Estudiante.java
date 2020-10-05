@@ -35,7 +35,7 @@ public class Estudiante extends Persona {
     int totalCreditos = 0;
     for (int i = 0; i < asignaturas.size(); i++) {
       total +=
-        (asignaturas.get(i).promedio()) * (asignaturas.get(i).getCreditos());
+        (asignaturas.get(i).promedioAsignatura()) * (asignaturas.get(i).getCreditos());
       totalCreditos += asignaturas.get(i).getCreditos();
     }
     return (total / totalCreditos);

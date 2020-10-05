@@ -112,7 +112,7 @@ public class Asignatura {
     }
   }
 
-  public float promedio() {
+  public float promedioAsignatura() {
     Calificacion n = this.getCalificaciones();
     return n.promedio();
   }

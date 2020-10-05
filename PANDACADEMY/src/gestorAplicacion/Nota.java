@@ -1,4 +1,4 @@
-//package src.gestorAplicacion;
+package src.gestorAplicacion;
 
 public class Nota {
   private float porcentaje;
