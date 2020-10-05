@@ -1,5 +1,6 @@
 package gestorAplicacion;
-
+import Asignatura.*;
+import Horario.*;
 import java.util.*;
 
 public class Profesor {
@@ -16,9 +17,11 @@ public class Profesor {
 		return asignatura;
 	}
 	
-	public Horario getHorario() {
-		for(int i=0, i < asesoria.size(), i++) {
-			return asesoria(i);
+	public void getHorario() {
+		for(int i=0; i < asesoria.size(); i++) {
+			System.out.println("Asesorias: ");
+			System.out.println(asignatura.getNombre());
+			System.out.println(asesoria.get(i).toString());
 		}
 	}
 }
