@@ -1,5 +1,5 @@
 package gertorAplicacion;
-
+import Caliificaciones.*;
 import java.util.ArrayList;
 import Horario.*;
 
@@ -96,18 +96,15 @@ public class Asignatura {
         return this.detalles;
     }
  
-    /*public String estadoAsignatura() {
+    public String estadoAsignatura() {
         Calificacion n = this.getCalificaciones();
-        double nota = 0;
-        for(int i = 0; i < n.getNotas().size(); i++){
-            //se suman todas las notas en las calificaciones, las notas tienen que estar multiplicadas por su %
-        }
+        float nota = calificaciones.promedio();
         if (nota >= 3.0) {
             return "Aprovada " + String.ValueOf(nota);
         } else {
             return "No aprovada " + String.valueOf(nota);
         }
-    } */
+    }
 
     public void mostrarNotas() {
         System.out.println("Tus notas de " + this.nombre + "son: ");
@@ -117,10 +114,11 @@ public class Asignatura {
         }
     }
 
-    /*public double promedio(){
+    public float promedio(){
         Calificacion n = this.getCalificaciones();
+        return n.promedio();
 
-    }*/
+    }
 
     public void mostrarHorario() {
         for(int i = 0; i < this.getHorarios().size(); i++){
