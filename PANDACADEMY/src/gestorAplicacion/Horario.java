@@ -1,35 +1,34 @@
-package gestorAplicacion;
+package src.gestorAplicacion;
 
 public class Horario {
-    
-    private String dia, horaInicio, horaFinal;
+  private String dia, horaInicio, horaFinal;
 
-    public Horario(String d, String i, String f){
-        this.dia = d;
-        this.HoraFinal = f;
-        this.HoraInicio = i;
-    }
+  public Horario(String d, String i, String f) {
+    this.dia = d;
+    this.horaFinal = f;
+    this.horaInicio = i;
+  }
 
-    public String getDia(){
-        return this.dia;
-    }
+  public String getDia() {
+    return this.dia;
+  }
 
-    public String getInicio() {
-        return this.HoraInicio;
-    }
+  public String getInicio() {
+    return this.horaInicio;
+  }
 
-    public String getFinal(){
-        return this.HoraFinal;
-    }
+  public String getFinal() {
+    return this.horaFinal;
+  }
 
-    public int getHoras() {
-        int inicio = Integer.parseInt(this.HoraInicio.substring(0, 1));
-        int fin = Integer.parseInt(this.HoraFinal.substring(0, 1));
-        return fin-inicio;
-    }
+  public int getHoras() {
+    int inicio = Integer.parseInt(this.horaInicio.substring(0, 1));
+    int fin = Integer.parseInt(this.horaFinal.substring(0, 1));
+    return fin - inicio;
+  }
 
-    public String toString() {
-        String horario = dia + "\n" + horaInicio + "\n" + horaFinal;
-        return horario;        
-    }
+  public String toString() {
+    String horario = dia + "\n" + horaInicio + "\n" + horaFinal;
+    return horario;
+  }
 }
