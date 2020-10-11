@@ -98,9 +98,9 @@ public class Asignatura {
   public String estadoAsignatura() {
     float nota = calificaciones.promedio();
     if (nota >= 3.0) {
-      return "Aprovada " + String.valueOf(nota);
+      return "Aprobada " + String.valueOf(nota);
     } else {
-      return "No aprovada " + String.valueOf(nota);
+      return "No aprobada " + String.valueOf(nota);
     }
   }
 

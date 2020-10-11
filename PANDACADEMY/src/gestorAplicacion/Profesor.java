@@ -16,9 +16,9 @@ public class Profesor {
   }
 
   public void getHorario() {
+    System.out.println("Asesorias: ");
+    System.out.println(asignatura.getNombre());
     for (int i = 0; i < asesoria.size(); i++) {
-      System.out.println("Asesorias: ");
-      System.out.println(asignatura.getNombre());
       System.out.println(asesoria.get(i).toString());
     }
   }

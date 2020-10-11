@@ -16,4 +16,16 @@ public class Persona {
   public long getDni() {
     return dni;
   }
+
+  public void setNombre(String nombre) {
+    this.nombre = nombre;    
+  }
+
+  public void setDni(long num) {
+    dni = num;
+  }
+
+  public void setCorreo(String correo) {
+    this.correo = correo;
+  }
 }
