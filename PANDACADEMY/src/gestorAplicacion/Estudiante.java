@@ -14,7 +14,7 @@ public class Estudiante extends Persona {
     return planDeEstudio;
   }
 
-  public List<Asignatura> getAsignatura() {
+  public List<Asignatura> getAsignaturas() {
     return asignaturas;
   }
 
@@ -23,19 +23,20 @@ public class Estudiante extends Persona {
       Asignatura m = asignaturas.get(i);
       if (m.getNombre().equalsIgnoreCase(nombre)) {
         return m;
-      } else {
-        System.out.println("Esta asignatura no se encuentra.");
       }
     }
     return null;
+  }
+
+  public Asignatura getAsignatura(int index) {
+    return asignaturas.get(index);
   }
 
   public float getPAPA() {
     float total = 0;
     int totalCreditos = 0;
     for (int i = 0; i < asignaturas.size(); i++) {
-      total +=
-        (asignaturas.get(i).promedioAsignatura()) * (asignaturas.get(i).getCreditos());
+      total += (asignaturas.get(i).promedioAsignatura()) * (asignaturas.get(i).getCreditos());
       totalCreditos += asignaturas.get(i).getCreditos();
     }
     return (total / totalCreditos);
@@ -43,6 +44,22 @@ public class Estudiante extends Persona {
 
   public void addAsignatura(Asignatura asignatura) {
     this.asignaturas.add(asignatura);
+  }
+
+  public void addAsignatura(int creditos, String nombre) {
+    this.asignaturas.add(new Asignatura(creditos, nombre));
+  }
+
+  public void addAsignatura(int creditos, String nombre, Profesor p) {
+    this.asignaturas.add(new Asignatura(creditos, nombre, p));
+  }
+
+  public void addAsignatura(int creditos, String nombrem, Profesor p, String det) {
+    this.asignaturas.add(new Asignatura(creditos, nombre, p, det));
+  }
+
+  public void addAsignatura(int creditos, String nombre, String det) {
+    this.asignaturas.add(new Asignatura(creditos, nombre, det));
   }
 
   public void getHorario() {

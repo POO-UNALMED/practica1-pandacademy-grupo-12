@@ -2,10 +2,16 @@ package gestorAplicacion;
 
 import java.util.*;
 
-public class Profesor {
+public class Profesor extends Persona {
   private List<Horario> asesoria;
   private Asignatura asignatura;
   public String detalles;
+
+  public Profesor(){}
+
+  public Profesor(String nombre) {
+    this.nombre = nombre;
+  }
 
   public void setAsignatura(Asignatura asignatura) {
     this.asignatura = asignatura;
