@@ -24,94 +24,158 @@ public class Interface {
     System.out.println("INGRESE SU CORREO(OPCIONAL): ");
     e.setCorreo(br.readLine()); // el usuario ingresa sus datos personales
 
-    // menu principal de la aplicacion
-    
-    System.out.println(" \n" + e.getNombre().toUpperCase()
-        + "\n=====MENU PRINCIPAL===== \n [0] PERFIL \n [1] ASIGNATURAS \n [2] NOTAS \n [3] HORARIO \n [4] PROFESORES \n [5] SALIR");
-    int comando = Integer.parseInt(br.readLine());
-    int comando1;
-    int comando2;
-    
-    
-    switch(comando){
-    
-		case 0: {
-			
-			
-				System.out.println("====PERFIL==== \n [0] MOSTRAR MI PERFIL \n [1] EDITAR MI PERFIL");
-				comando1 = Integer.parseInt(br.readLine());
-				
-				switch(comando1){
-					case 0: {
-						System.out.println("Nombre: "+e.getNombre()+"\n"+ "Correo: "+e.getCorreo()+"\n" + "Docuemto identidad: "+e.getDni()+"\n"
-								+"Plan de estudios: "+e.getPlanDeEstudio()+ "\n");
-						System.out.println("9 PARA SALIR ");
-						comando1= Integer.parseInt(br.readLine());
-						break;
-						
-						
-					}
-					case 1: {
-						
-						boolean aux=true;
-						
-						while (aux) { // bucle para que se imprima el menú hasta que se ingrese 4 
-						
-							System.out.println("====EDITAR MI PERFIL==== \n [0] EDITAR NOMBRE  \n [1] EDITAR DOCUMENTO DE IDENTIDAD \n "
-									+ "[2] EDITAR CORREO \n [3] EDITAR PLAN DE ESTUDIOS \n [4] SALIR" );
-							comando2 = Integer.parseInt(br.readLine());
-							
-							switch(comando2) {
-							
-							case 0:{
-								System.out.println("Digite el nuevo nombre: ");
-								e.setNombre(br.readLine());
-								break;
-								
-							}
-							case 1:{
-								System.out.println("Digite el nuevo documento de identidad: ");
-								e.setDni( Integer.parseInt(br.readLine()));
-								break;
-								
-							}
-							case 2:{
-								System.out.println("Digite el nuevo correo: ");
-								e.setCorreo(br.readLine());
-								break;
-							}
-							case 3:{
-								System.out.println("Digite el nuevo plan de estudios: ");
-								e.setPlanDeEstudo(br.readLine());
-								break;
-							}
-							case 4:{
-								aux=false;
-								break;
-							}
-					
-						
-							}
-							
-						}				
-						
-						break;
-					}
-						
-					case 2: {
-						    break;
-						
-					}
-					
-				}
-				System.out.println("se devolvio al menu principal");
+    int comando = 0, comando1, comando2;
 
-				break;
-		}
-		
-	
-	}
-    
+    // menu principal de la aplicacion
+    System.out.println(" \n" + e.getNombre().toUpperCase());
+    while (comando != 5) {
+
+      System.out.println(
+          "\n=====MENU PRINCIPAL=====\n[0] PERFIL\n[1] ASIGNATURAS\n[2] NOTAS\n[3] HORARIO\n[4] PROFESORES\n[5] SALIR\n");
+      comando = Integer.parseInt(br.readLine());
+
+      switch (comando) {
+
+        case 0:
+          comando1 = 0;
+          comando2 = 0;
+          while (comando1 != 9) { // bucle para el menu PERFIL hasta que se ingrese 9
+
+            System.out.println(
+                "\n====PERFIL==== \n [0] MOSTRAR MI PERFIL \n [1] EDITAR MI PERFIL \n [9] VOLVER AL MENU PRINCIPAL \n");
+            comando1 = Integer.parseInt(br.readLine());
+
+            switch (comando1) {
+              case 0:
+                System.out.println("\nNombre: " + e.getNombre() + "\n" + "Correo: " + e.getCorreo() + "\n"
+                    + "Docuemto identidad: " + e.getDni() + "\n" + "Plan de estudios: " + e.getPlanDeEstudio() + "\n");
+                // automaticamente regresa al menu PERFIL
+                break;
+              case 1:
+                while (comando2 != 9) { // bucle para que se imprima el menú hasta que se ingrese 9
+
+                  System.out
+                      .println("\n===EDITAR MI PERFIL=== \n [0] EDITAR NOMBRE  \n [1] EDITAR DOCUMENTO DE IDENTIDAD \n "
+                          + "[2] EDITAR CORREO \n [3] EDITAR PLAN DE ESTUDIOS \n [9] VOLVER \n");
+                  comando2 = Integer.parseInt(br.readLine());
+
+                  switch (comando2) {
+                    case 0:
+                      System.out.println("\nDIGITE EL NUEVO NOMBRE: ");
+                      e.setNombre(br.readLine());
+                      break;
+                    case 1:
+                      System.out.println("\nDIGITE EL NUEVO DOCUMENTO DE IDENTIDAD: ");
+                      e.setDni(Integer.parseInt(br.readLine()));
+                      break;
+                    case 2:
+                      System.out.println("\nDIGITE EL NUEVO CORREO: ");
+                      e.setCorreo(br.readLine());
+                      break;
+                    case 3:
+                      System.out.println("\nDIGITE EL NUEVO PLAN DE ESTUDIO: ");
+                      e.setPlanDeEstudo(br.readLine());
+                      System.out.println();
+                      break;
+                  }
+                }
+                break;
+            }
+          }
+          break;// final del menu PERFIL
+
+        case 1:
+          comando1 = 0;
+          String nombre, creditos, profesor, det;
+          while (comando1 != 9) {
+            System.out.println(
+                "\n====ASIGNATURAS====\n[0] MIS ASIGNATURAS\n[1] EDITAR ASIGNATURAS\n[2] AGREGAR ASIGNATURA\n[3] ELIMINAR ASIGNATURA\n[9] VOLVER\n");
+            comando1 = Integer.parseInt(br.readLine());
+
+            switch (comando1) {
+              case 0:
+                if (e.getAsignaturas().size() > 0) {
+                  for (int i = 0; i < e.getAsignaturas().size(); i++) {
+                    System.out.println(
+                        e.getAsignatura(i).getNombre().toUpperCase() + "   " + e.getAsignatura(i).estadoAsignatura());
+                  }
+                }
+                else{System.out.println("\nNO TIENES ASIGNATURAS INSCRIPTAS");}
+                break;
+
+              case 1:
+                // menu de editar asignatura
+                break;
+              case 2:
+
+                System.out.println("\n===NUEVA ASIGNATURA===\n* obligatorios\n*NOMBRE DE LA ASIGNATURA: ");
+                nombre = br.readLine();
+                System.out.println("*CREDITOS: ");
+                creditos = br.readLine();
+                System.out.println("PROFESOR: ");
+                profesor = br.readLine();
+                System.out.println("DETALLES: ");
+                det = br.readLine();
+
+                if (profesor.equals("") && det.equals("")) {
+                  e.addAsignatura(Integer.parseInt(creditos), nombre);
+                } else if (profesor.equals("")) {
+                  e.addAsignatura(Integer.parseInt(creditos), nombre, det);
+                } else if (det.equals("")) {
+                  e.addAsignatura(Integer.parseInt(creditos), nombre, new Profesor(profesor));
+                } else {
+                  e.addAsignatura(Integer.parseInt(creditos), nombre, new Profesor(profesor), det);
+                }
+                System.out.println("\nASIGNATURA CREADA\n");
+                break;
+              case 3:
+                System.out.println("\n===BORRAR ASIGNATURA===\nNOMBRE DE LA ASIGNATURA: ");
+                nombre = br.readLine();
+                boolean chek = false;
+                for (int i = 0; i < e.getAsignaturas().size(); i++) {
+                  Asignatura m = e.getAsignatura(i);
+                  if (m.getNombre().equalsIgnoreCase(nombre)) {
+                    e.getAsignaturas().remove(i);
+                    System.out.println("ASIGNATURA BORRADA");
+                    chek = true;
+                    break;
+                  }
+                }
+                if (!chek) {
+                  System.out.println("ESTA ASIGNATURA NO SE ENCUENTRA");
+                }
+                break;
+            }
+          }
+          break;// fin menu de ASIGNATURAS
+        case 2:
+          break;// menu de NOTAS
+        case 3:
+          comando1 = 0;
+          while (comando1 != 9) {
+            System.out.println(
+                "\n====HORARIOS====\n[0] MOSTRAR HORARIO DE CLASES\n[1] MOSTRAR HORARIO DE ASESORIAS\n[9] VOLVER\n");
+            comando1 = Integer.parseInt(br.readLine());
+
+            switch (comando1) {
+              case 0:
+                for (int i = 0; i < e.getAsignaturas().size(); i++) {
+                  e.getAsignatura(i).mostrarHorario();
+                }
+                break;
+
+              case 1:
+                for (int i = 0; i < e.getAsignaturas().size(); i++) {
+                  e.getAsignatura(i).getProfesor().getHorario();
+                  ;
+                }
+            }
+          }
+          break;// fin del menu HORARIO
+      }
+
+    }
+
   }
-  
+
 }
