@@ -3,6 +3,8 @@ package uiMain;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 import gestorAplicacion.*;
 
 public class Interface {
@@ -144,12 +146,111 @@ public class Interface {
                 if (!chek) {
                   System.out.println("ESTA ASIGNATURA NO SE ENCUENTRA");
                 }
+                
+                
                 break;
             }
           }
           break;// fin menu de ASIGNATURAS
-        case 2:
-          break;// menu de NOTAS
+          
+        case 2:// menu de NOTAS
+        	comando1=0;
+        	while(comando1 !=9) {
+        		System.out.println("\n====NOTAS====\n[0] MOSTRAR NOTAS\n[1] CALCULAR PAPA \n[2] CALCULADORA: ¿CUANTO NECESITO PARA EL FINAL? \n[9] VOLVER\n");
+        		comando1 = Integer.parseInt(br.readLine());
+        		switch (comando1) {
+        		
+        		case 0:  // PENDIENTE POR REVISAR 
+        			ArrayList<Asignatura> asig = e.getAsignaturas();         
+	        		for (int i=0; i< asig.size();i++) {						 
+	        			System.out.println(asig.get(i).getNombre()+": ");
+	        			asig.get(i).mostrarNotas();
+	        			System.out.println("\n");
+	        		}
+	        			
+        			break;
+        		case 1:  // PENDIENTE POR REVISAR 
+        			System.out.println("Tu PAPA actual es: ");
+        			e.getPAPA();
+        			break;
+        			
+        			
+        		case 2:
+        			comando2=0;
+        			ArrayList<Nota> notas= new ArrayList<>();
+        			while(comando2!=9) {
+                			
+            			System.out.println("\n====¿CUANTO NECESITO PARA EL FINAL?====\n[0] AÑADIR NOTA \n[1] ELIMINAR NOTA \n[2] CALCULAR \n[9] VOLVER \n" );
+    					for (int i=0;i<notas.size();i++) {
+    						System.out.println((i) + ". Nota: "+notas.get(i).getNota()+" Porcentaje :"+ Math.round(notas.get(i).getPorcentaje()*100) + "% \n" );
+    					}
+    					comando2=Integer.parseInt(br.readLine());            		
+    					
+            			switch (comando2) {
+            				case 0:
+            					
+	            				System.out.println("Nota: ");
+	            				float note=Float.parseFloat(br.readLine());
+	            				System.out.println("porcentaje (%) : ");
+	            				float porcent=Float.parseFloat(br.readLine()) / 100  ;
+	            				notas.add( new Nota( porcent,note) );
+	            				
+	            				break;
+            				case 1:
+            					if ( notas.size()==0) {
+            						System.out.println("No has añadido notas \n");
+                					System.out.println("presione ENTER para continuar");
+                					br.readLine();
+            					}
+            					else {
+	            					System.out.println("Ingresa el numero de la nota que deseas remover : \n");
+	            					notas.remove(Integer.parseInt(br.readLine()));
+	            					System.out.println("Nota eliminada con exito\n");
+                					System.out.println("presione ENTER para continuar");
+                					br.readLine();
+            					}
+            					break;
+            				case 2:
+            					
+            					float sumaP=0;
+            					for (int i=0;i<notas.size();i++) {
+            						sumaP= sumaP + notas.get(i).getPorcentaje();
+            					}
+            					if (sumaP>1) {
+            						System.out.println("La suma de los porcentajes no puede ser mas del 100% \n");
+                					System.out.println("presione ENTER para continuar");
+                					br.readLine();
+            					}
+            					else if(sumaP==1) {
+            						
+            						float ponderado=0;
+                					for (int i=0;i<notas.size();i++) {
+                						ponderado = ponderado + notas.get(i).getNota()*notas.get(i).getPorcentaje();
+                					}
+                					System.out.println("Tu nota final es: " + ponderado +"\n");
+                					System.out.println("presione ENTER para continuar");
+                					br.readLine();
+            					}
+            					else {
+            						
+            						
+            						
+            						
+            						// Necesitas (nota) en el % para ganar la asignatura
+            						
+            						
+            						
+            					}
+            					
+            				break;
+            			}
+            		
+        			}
+        			break;
+        		}
+        	}
+          break;//fin menu de NOTAS
+          
         case 3:
           comando1 = 0;
           while (comando1 != 9) {
@@ -172,6 +273,12 @@ public class Interface {
             }
           }
           break;// fin del menu HORARIO
+        case 4: //  
+
+        	break;
+        	
+        
+        
       }
 
     }

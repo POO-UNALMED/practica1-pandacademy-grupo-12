@@ -14,7 +14,7 @@ public class Estudiante extends Persona {
     return planDeEstudio;
   }
 
-  public List<Asignatura> getAsignaturas() {
+  public ArrayList<Asignatura> getAsignaturas() {
     return asignaturas;
   }
 
