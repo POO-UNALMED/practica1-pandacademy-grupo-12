@@ -2,7 +2,7 @@ package src.gestorAplicacion;
 
 import java.util.*;
 
-public class Profesor {
+public class Profesor extends Persona {
   private List<Horario> asesoria;
   private Asignatura asignatura;
   public String detalles;
