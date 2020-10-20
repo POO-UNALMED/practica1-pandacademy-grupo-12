@@ -1,33 +1,35 @@
 package BaseDatos;
 
-import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class Serialization{ 
-	
+public class Deserialization {
 	static File archivo = new File("");
 	static ArrayList<ArrayList> objetos = new ArrayList<>();
-	
+
 	public static void main(String[] args) {
 		try {
-			FileOutputStream f = new FileOutputStream(new File(archivo.getAbsolutePath() + 
+			FileInputStream f = new FileInputStream(new File(archivo.getAbsolutePath() + 
 					"\\src\\archivos\\Personas.txt"));
-			ObjectOutputStream o = new ObjectOutputStream(f);
+			ObjectInputStream o = new ObjectInputStream(f);
 				
-			for (int i=0; i<objetos.size(); i++) {
-				o.writeObject(objetos.get(i));
+			while(true) {
+				ArrayList<Object> lista = (ArrayList) o.readObject();
+				objetos.add(lista);
 			}
 			
-			o.close();
 			f.close();
+			o.close();
+		} catch(ClassNotFoundException e) {
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
 		}
 	}
-	
+
 }

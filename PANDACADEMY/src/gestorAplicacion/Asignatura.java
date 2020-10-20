@@ -1,4 +1,4 @@
-package src.gestorAplicacion;
+package gestorAplicacion;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,27 +15,27 @@ public class Asignatura implements Serializable{
   //constructores
   public Asignatura() {}
 
-  public Asignatura(int cred, String nom) {
-    this.creditos = cred;
-    this.nombre = nom;
+  public Asignatura(int creditos, String nombrebre) {
+    this.creditos = creditos;
+    this.nombre = nombrebre;
   }
 
-  public Asignatura(int cred, String nom, Profesor p) {
-    this.creditos = cred;
-    this.nombre = nom;
+  public Asignatura(int creditos, String nombre, Profesor p) {
+    this.creditos = creditos;
+    this.nombre = nombre;
     this.profesor = p;
   }
 
-  public Asignatura(int cred, String nom, Profesor p, String det) {
-    this.creditos = cred;
-    this.nombre = nom;
+  public Asignatura(int creditos, String nombre, Profesor p, String det) {
+    this.creditos = creditos;
+    this.nombre = nombre;
     this.profesor = p;
     this.detalles = det;
   }
 
-  public Asignatura(int cred, String nom, String det) {
-    this.creditos = cred;
-    this.nombre = nom;
+  public Asignatura(int creditos, String nombre, String det) {
+    this.creditos = creditos;
+    this.nombre = nombre;
     this.detalles = det;
   }
 
@@ -98,12 +98,15 @@ public class Asignatura implements Serializable{
   }
 
   public String estadoAsignatura() {
-    float nota = calificaciones.promedio();
-    if (nota >= 3.0) {
-      return "Aprobada " + String.valueOf(nota);
-    } else {
-      return "No aprobada " + String.valueOf(nota);
+    if (calificaciones!=null) {
+      float nota = calificaciones.promedio();
+      if (nota >= 3.0) {
+        return "Aprobada " + String.valueOf(nota);
+      } else {
+        return "No aprobada " + String.valueOf(nota);
+      } 
     }
+    return "No aprobada 0.0";
   }
 
   public void mostrarNotas() {

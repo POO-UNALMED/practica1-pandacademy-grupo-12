@@ -1,4 +1,4 @@
-package src.gestorAplicacion;
+package gestorAplicacion;
 
 import java.io.Serializable;
 
