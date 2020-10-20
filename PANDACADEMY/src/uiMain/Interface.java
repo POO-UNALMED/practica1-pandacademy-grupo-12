@@ -5,11 +5,29 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import BaseDatos.*;
 import gestorAplicacion.*;
 
 public class Interface {
+	
+	public static void main(String[] args){
+		/*Profesor.profesores.add(new Profesor("Ernesto", "no tiene", "tampoco tiene", new Asignatura()));
+		Profesor.profesores.add(new Profesor("Jona", "than", "xD", new Asignatura()));
+		Nota.notas.add(new Nota(38, 2));
+		Nota.notas.add(new Nota(25, 5));
+		Serialization.serializar();*/
+		
+		Deserialization.deserializar();
+		System.out.println("\n"+Deserialization.objetos);
+		
+		System.out.println("\n"+Profesor.profesores);
+		
+		for (int i=0; i < Deserialization.objetos.get(0).size(); i++) {
+			
+		}
+	}
 
-  public static void main(String[] args) throws IOException {
+  /*public static void main(String[] args) throws IOException {
     Estudiante e = new Estudiante();
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     System.out.println("=====PANDACADEMY=====");
@@ -430,5 +448,5 @@ public class Interface {
           }
       }
     }
-  }
+  }*/
 }

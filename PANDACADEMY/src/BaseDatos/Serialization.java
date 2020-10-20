@@ -1,4 +1,5 @@
 package BaseDatos;
+import gestorAplicacion.*;
 
 import java.io.EOFException;
 import java.io.File;
@@ -13,13 +14,16 @@ public class Serialization{
 	static File archivo = new File("");
 	static ArrayList<ArrayList> objetos = new ArrayList<>();
 	
-	public static void main(String[] args) {
+	public static void serializar() {
+		objetos.add(Profesor.profesores);
+		objetos.add(Nota.notas);
+		
 		try {
-			FileOutputStream f = new FileOutputStream(new File(archivo.getAbsolutePath() + 
-					"\\src\\archivos\\Personas.txt"));
+			FileOutputStream f = new FileOutputStream("personas.txt");
 			ObjectOutputStream o = new ObjectOutputStream(f);
 				
 			for (int i=0; i<objetos.size(); i++) {
+				System.out.println(objetos.get(i));
 				o.writeObject(objetos.get(i));
 			}
 			

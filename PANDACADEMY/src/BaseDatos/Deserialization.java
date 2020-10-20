@@ -11,21 +11,19 @@ import java.util.ArrayList;
 
 public class Deserialization {
 	static File archivo = new File("");
-	static ArrayList<ArrayList> objetos = new ArrayList<>();
+	public static ArrayList<ArrayList> objetos = new ArrayList<>();
 
-	public static void main(String[] args) {
+	public static void deserializar() {
 		try {
-			FileInputStream f = new FileInputStream(new File(archivo.getAbsolutePath() + 
-					"\\src\\archivos\\Personas.txt"));
+			FileInputStream f = new FileInputStream("personas.txt");
 			ObjectInputStream o = new ObjectInputStream(f);
 				
 			while(true) {
 				ArrayList<Object> lista = (ArrayList) o.readObject();
+				System.out.println(lista);
 				objetos.add(lista);
 			}
 			
-			f.close();
-			o.close();
 		} catch(ClassNotFoundException e) {
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
