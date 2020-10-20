@@ -1,9 +1,10 @@
 package src.gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Asignatura {
+public class Asignatura implements Serializable{
   private int creditos;
   private String nombre;
   private Profesor profesor;

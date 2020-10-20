@@ -1,9 +1,9 @@
 package src.gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.*;
-import java.io.
 
-public class Estudiante extends Persona {
+public class Estudiante extends Persona implements Serializable{
   private String planDeEstudio;
   private ArrayList<Asignatura> asignaturas = new ArrayList<>();
 

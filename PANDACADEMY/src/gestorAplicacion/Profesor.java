@@ -1,8 +1,9 @@
 package src.gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Profesor extends Persona {
+public class Profesor extends Persona implements Serializable {
   private List<Horario> asesoria;
   private Asignatura asignatura;
   public String detalles;

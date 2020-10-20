@@ -1,8 +1,9 @@
 package src.gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Calificacion {
+public class Calificacion implements Serializable{
   private ArrayList<Nota> notas = new ArrayList<Nota>();
   private Asignatura asignatura;
 

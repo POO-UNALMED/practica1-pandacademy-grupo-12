@@ -1,6 +1,8 @@
 package src.gestorAplicacion;
 
-public class Horario {
+import java.io.Serializable;
+
+public class Horario implements Serializable{
   private String dia, horaInicio, horaFinal;
 
   public Horario(String d, String i, String f) {
