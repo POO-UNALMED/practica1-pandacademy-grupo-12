@@ -1,4 +1,4 @@
-package src.gestorAplicacion;
+package gestorAplicacion;
 
 public class Horario {
   private String dia, horaInicio, horaFinal;

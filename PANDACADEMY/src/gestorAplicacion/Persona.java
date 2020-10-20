@@ -1,4 +1,4 @@
-package src.gestorAplicacion;
+package gestorAplicacion;
 
 public class Persona {
   protected long dni;
