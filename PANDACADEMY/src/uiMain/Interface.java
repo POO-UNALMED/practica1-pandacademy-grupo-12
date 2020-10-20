@@ -10,11 +10,12 @@ import gestorAplicacion.*;
 
 public class Interface {
 	
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args){
-		/*Profesor.profesores.add(new Profesor("Ernesto", "no tiene", "tampoco tiene", new Asignatura()));
-		Profesor.profesores.add(new Profesor("Jona", "than", "xD", new Asignatura()));
-		Nota.notas.add(new Nota(38, 2));
-		Nota.notas.add(new Nota(25, 5));
+		/*new Profesor("Ernesto", "no tiene", "tampoco tiene", new Asignatura());
+		new Profesor("Jona", "than", "xD", new Asignatura());
+		new Nota(38, 2);
+		new Nota(25, 5);
 		Serialization.serializar();*/
 		
 		Deserialization.deserializar();
@@ -23,8 +24,13 @@ public class Interface {
 		System.out.println("\n"+Profesor.profesores);
 		
 		for (int i=0; i < Deserialization.objetos.get(0).size(); i++) {
-			
+			Profesor.profesores.add((Profesor)Deserialization.objetos.get(0).get(i));
 		}
+		for (int i=0; i < Deserialization.objetos.get(1).size(); i++) {
+			Nota.notas.add((Nota)Deserialization.objetos.get(1).get(i));
+		}
+		
+		System.out.println("\n"+Profesor.profesores);
 	}
 
   /*public static void main(String[] args) throws IOException {

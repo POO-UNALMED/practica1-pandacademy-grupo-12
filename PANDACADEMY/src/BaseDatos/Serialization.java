@@ -17,13 +17,15 @@ public class Serialization{
 	public static void serializar() {
 		objetos.add(Profesor.profesores);
 		objetos.add(Nota.notas);
+		objetos.add(Asignatura.asignaturas);
+		objetos.add(Calificacion.calificaciones);
+		objetos.add(Horario.horarios);
 		
 		try {
 			FileOutputStream f = new FileOutputStream("personas.txt");
 			ObjectOutputStream o = new ObjectOutputStream(f);
 				
 			for (int i=0; i<objetos.size(); i++) {
-				System.out.println(objetos.get(i));
 				o.writeObject(objetos.get(i));
 			}
 			

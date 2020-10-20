@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 public class Asignatura implements Serializable{
+	public static ArrayList<Asignatura> asignaturas = new ArrayList<>();
   private int creditos;
   private String nombre;
   private Profesor profesor;
