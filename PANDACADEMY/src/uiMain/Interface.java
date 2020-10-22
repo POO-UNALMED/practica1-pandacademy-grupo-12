@@ -50,11 +50,15 @@ public class Interface {
 
             switch (comando1) {
               case 0:
-                System.out.println("\nNombre: " + e.getNombre() + "\n" + "Correo: " + e.getCorreo() + "\n"
-                    + "Docuemto identidad: " + e.getDni() + "\n" + "Plan de estudios: " + e.getPlanDeEstudio() + "\n");
+                System.out.println("\nNOMBRE: " + e.getNombre() + "\nDOCUMENTO DE IDENTIDAD: " + e.getDni()
+                    + "\nCORREO: " + e.getCorreo() + "\n" + "PLAN DE ESTUDIOS: " + e.getPlanDeEstudio() + "\n");
+                System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
+                br.readLine();
                 // automaticamente regresa al menu PERFIL
                 break;
+
               case 1:
+                comando2 = 0;
                 while (comando2 != 9) { // bucle para que se imprima el menú hasta que se ingrese 9
 
                   System.out
@@ -104,6 +108,8 @@ public class Interface {
                 } else {
                   System.out.println("\nNO TIENES ASIGNATURAS INSCRIPTAS");
                 }
+                System.out.println("\nPRESIONE <ENTER> PARA CONTINUAR");
+                br.readLine();
                 break;
 
               case 1:
@@ -120,18 +126,46 @@ public class Interface {
                 System.out.println("DETALLES: ");
                 det = br.readLine();
 
-                if (profesor.equals("") && det.equals("")) {
-                  e.addAsignatura(Integer.parseInt(creditos), nombre);
-                } else if (profesor.equals("")) {
-                  e.addAsignatura(Integer.parseInt(creditos), nombre, det);
-                } else if (det.equals("")) {
-                  e.addAsignatura(Integer.parseInt(creditos), nombre,
-                      new Profesor(profesor, "", "", new Asignatura(Integer.parseInt(creditos),nombre)));
-                } else {
-                  e.addAsignatura(Integer.parseInt(creditos), nombre,
-                      new Profesor(profesor, "", "", new Asignatura(Integer.parseInt(creditos),nombre)), det);
+                for (int i = 0; i < e.getAsignaturas().size(); i++) {
+                  if (e.getAsignatura(i).getNombre().equals(nombre)) {
+                    System.out.println("\nESTA ASIGNATURA YA ESTA CREADA\n");
+                    break;
+                  }
                 }
+
+                e.addAsignatura(new Asignatura(Integer.parseInt(creditos), nombre, new Profesor(profesor), det));
+                e.getAsignatura(nombre).getProfesor().setAsignatura(e.getAsignatura(nombre));
+
+                System.out.println("\nINGRESE NUMERO DE CLASES SEMANALES:   ");
+                int j = Integer.parseInt(br.readLine());
+                for (int i = 0; i < j; i++) {
+                  System.out.println("\n==NUEVO HORARIO==\nDIA: ");
+                  dia = br.readLine();
+                  System.out.println("\nHORA INICIO(HH:MM): ");
+                  h1 = br.readLine();
+                  System.out.println("\nHORA FINAL(HH:MM): ");
+                  h2 = br.readLine();
+                  boolean aux = true;
+                  String comp = dia + "\n" + h1 + "\n" + h2;
+                  for (int k = 0; k < e.getAsignaturas().size(); k++) {
+                    if (e.getAsignatura(k).mostrarHorario().indexOf(comp) != -1) {
+                      aux = false;
+                    }
+                  }
+                  if (aux) {
+                    e.getAsignatura(nombre).addHorario(new Horario(dia, h1, h2));
+                    System.out.println("\nHORARIO AÑADIDO\nPRESIONE <ENTER> PARA CONTINUAR");
+                    br.readLine();
+                  } else {
+                    System.out.println("\nHORARIO NO VALIDO\nPRESIONE <ENTER> PARA CONTINUAR");
+                    br.readLine();
+                    i--;
+                  }
+                }
+
                 System.out.println("\nASIGNATURA CREADA\n");
+                System.out.println("\nPRESIONE <ENTER> PARA CONTINUAR");
+                br.readLine();
                 break;
               case 3:
                 System.out.println("\n===BORRAR ASIGNATURA===\nNOMBRE DE LA ASIGNATURA: ");
@@ -167,17 +201,22 @@ public class Interface {
                 ArrayList<Asignatura> asig = e.getAsignaturas();
                 if (asig.size() != 0) {
                   for (int i = 0; i < asig.size(); i++) {
-                    System.out.println(asig.get(i).getNombre() + ": ");
-                    asig.get(i).mostrarNotas();
-                    System.out.println("\n");
+                    if (!asig.get(i).getCalificaciones().getNotas().isEmpty()) {
+                      System.out.println(asig.get(i).getNombre() + ": \n" + asig.get(i).mostrarNotas() + "\n");
+                    } else {
+                      System.out.println("\nNO TIENES NINGUNA NOTA");
+                    }
                   }
                 } else {
                   System.out.println("\nNO TIENES NINGUNA NOTA");
                 }
+                System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
+                br.readLine();
                 break;
               case 1:
-                System.out.println("\nTU PAPA ACTUAL ES: ");
-                e.getPAPA();
+                System.out.println("\nTU PAPA ACTUAL ES: " + e.getPAPA());
+                System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
+                br.readLine();
                 break;
 
               case 2:
@@ -194,6 +233,7 @@ public class Interface {
 
                   switch (comando2) {
                     case 0:
+                      notas.clear();
                       System.out.println("\nNUMERO DE PERIODOS O CORTES: ");
                       int p = Integer.parseInt(br.readLine());
                       for (int i = 1; i < p; i++) {
@@ -260,7 +300,7 @@ public class Interface {
                 if (!e.getAsignaturas().isEmpty()) {
                   for (int i = 0; i < e.getAsignaturas().size(); i++) {
                     try {
-                      e.getAsignatura(i).mostrarHorario();
+                      System.out.println(e.getAsignatura(i).getNombre()+"\n"+e.getAsignatura(i).mostrarHorario());
                     } catch (Exception x) {
                       System.out.println("\n" + e.getAsignatura(i).getNombre() + "NO TIENES HORARIOS ASIGNADOS\n");
                     }
@@ -276,7 +316,7 @@ public class Interface {
                 if (!Profesor.profesores.isEmpty()) {
                   for (int i = 0; i < Profesor.profesores.size(); i++) {
                     try {
-                      Profesor.profesores.get(i).getHorario();
+                      System.out.println(Profesor.profesores.get(i).getHorario());
                     } catch (Exception x) {
                       System.out.println("\nNO TIENES HORARIOS ASIGNADOS\n");
                     }
@@ -340,6 +380,7 @@ public class Interface {
                       for (int i = 0; i < Profesor.profesores.size(); i++) {
                         Profesor p = Profesor.profesores.get(i);
                         if (p.getNombre().equalsIgnoreCase(nombre)) {
+                          p.getAsignatura().setProfesor(null);
                           Profesor.profesores.remove(i);
                           System.out.println("\nPROFESOR BORRADO\n");
                           aux = true;
@@ -362,6 +403,7 @@ public class Interface {
                         System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
                         br.readLine();
                       } else {
+                        comando3 = 0;
                         while (comando3 != 9) {
                           System.out.println(
                               "\n===MODIFICAR PROFESOR===\n[0] NOMBRE\n[1] CORREO\n[2] ASIGNATURA\n[3] ASESORIAS\n[4] DETALLES\n[9] VOLVER");
@@ -403,10 +445,21 @@ public class Interface {
                                 h1 = br.readLine();
                                 System.out.println("\nHORA FINAL(HH:MM): ");
                                 h2 = br.readLine();
-                                p.setAsesoria(new Horario(dia, h1, h2));
-                                System.out.println("\nHORARIO AÑADIDO\nPRESIONE <ENTER> PARA CONTINUAR");
-                                br.readLine();
-
+                                aux = true;
+                                String comp = dia + "\n" + h1 + "\n" + h2;
+                                for (int k = 0; k < e.getAsignaturas().size(); k++) {
+                                  if (e.getAsignatura(k).mostrarHorario().indexOf(comp) < 0) {
+                                    aux = false;
+                                  }
+                                }
+                                if (aux) {
+                                  p.setAsesoria(new Horario(dia, h1, h2));
+                                  System.out.println("\nHORARIO AÑADIDO\nPRESIONE <ENTER> PARA CONTINUAR");
+                                  br.readLine();
+                                } else {
+                                  System.out.println("\nHORARIO NO VALIDO\nPRESIONE <ENTER> PARA CONTINUAR");
+                                  br.readLine();
+                                }
                               }
                               System.out.println("\nCAMBIO REALIZADO\nPRESIONE <ENTER> PARA CONTINUAR");
                               br.readLine();

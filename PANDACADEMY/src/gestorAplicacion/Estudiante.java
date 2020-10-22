@@ -46,26 +46,12 @@ public class Estudiante extends Persona {
     this.asignaturas.add(asignatura);
   }
 
-  public void addAsignatura(int creditos, String nombre) {
-    this.asignaturas.add(new Asignatura(creditos, nombre));
-  }
-
-  public void addAsignatura(int creditos, String nombre, Profesor p) {
-    this.asignaturas.add(new Asignatura(creditos, nombre, p));
-  }
-
-  public void addAsignatura(int creditos, String nombrem, Profesor p, String det) {
-    this.asignaturas.add(new Asignatura(creditos, nombre, p, det));
-  }
-
-  public void addAsignatura(int creditos, String nombre, String det) {
-    this.asignaturas.add(new Asignatura(creditos, nombre, det));
-  }
-
-  public void getHorario() {
+  public String getHorario() {
+    String comp = "";
     for (int i = 0; i < asignaturas.size(); i++) {
-      System.out.println(asignaturas.get(i).getNombre());
+      comp = comp + asignaturas.get(i).getNombre()+"\n"+
       asignaturas.get(i).mostrarHorario();
     }
+    return comp;
   }
 }
