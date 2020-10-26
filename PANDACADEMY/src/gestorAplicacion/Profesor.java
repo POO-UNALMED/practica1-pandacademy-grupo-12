@@ -1,8 +1,10 @@
 package gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Profesor extends Persona {
+
+public class Profesor extends Persona implements Serializable {
   public static ArrayList<Profesor> profesores = new ArrayList<>();
   private ArrayList<Horario> asesoria = new ArrayList<>();
   private Asignatura asignatura;
