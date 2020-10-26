@@ -3,9 +3,8 @@ package gestorAplicacion;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
-public class Asignatura implements Serializable{
-	public static ArrayList<Asignatura> asignaturas = new ArrayList<>();
+public class Asignatura implements Serializable {
+  public static ArrayList<Asignatura> asignaturas = new ArrayList<>();
   private int creditos;
   private String nombre;
   private Profesor profesor;
@@ -13,18 +12,8 @@ public class Asignatura implements Serializable{
   private ArrayList<Horario> horarios = new ArrayList<>();
   private String detalles;
 
-  //constructores
-  public Asignatura() {}
-
-  public Asignatura(int creditos, String nombrebre) {
-    this.creditos = creditos;
-    this.nombre = nombrebre;
-  }
-
-  public Asignatura(int creditos, String nombre, Profesor p) {
-    this.creditos = creditos;
-    this.nombre = nombre;
-    this.profesor = p;
+  // constructores
+  public Asignatura() {
   }
 
   public Asignatura(int creditos, String nombre, Profesor p, String det) {
@@ -40,7 +29,11 @@ public class Asignatura implements Serializable{
     this.detalles = det;
   }
 
-  //metodos get y set
+  public Asignatura(String nombre) {
+    this.nombre = nombre;
+  }
+
+  // metodos get y set
   public void setCreditos(int c) {
     this.creditos = c;
   }
@@ -99,23 +92,24 @@ public class Asignatura implements Serializable{
   }
 
   public String estadoAsignatura() {
-    if (calificaciones!=null) {
+    if (calificaciones != null) {
       float nota = calificaciones.promedio();
       if (nota >= 3.0) {
         return "Aprobada " + String.valueOf(nota);
       } else {
         return "No aprobada " + String.valueOf(nota);
-      } 
+      }
     }
     return "No aprobada 0.0";
   }
 
-  public void mostrarNotas() {
-    System.out.println("Tus notas de " + this.nombre + "son: ");
+  public String mostrarNotas() {
+    String comp = "Tus notas de " + this.nombre + "son:\n";
     ArrayList<Nota> n = this.getCalificaciones().getNotas();
     for (int i = 0; i < n.size(); i++) {
-      System.out.print(n.get(i).getNota() + " "); //imprime una lista de todas las notas
+      comp = comp + n.get(i).getNota() + " "; // imprime una lista de todas las notas
     }
+    return comp;
   }
 
   public float promedioAsignatura() {
@@ -123,16 +117,11 @@ public class Asignatura implements Serializable{
     return n.promedio();
   }
 
-  public void mostrarHorario() {
+  public String mostrarHorario() {
+    String comp = "";
     for (int i = 0; i < this.getHorarios().size(); i++) {
-      System.out.println(this.getHorario(i).toString());
+      comp = comp + this.getHorario(i).toString() + "\n";
     }
-  }
-
-  public void borrarHorario(Horario h) {
-    int horario = this.getHorarios().indexOf(h);
-    if (horario >= 0) {
-      this.getHorarios().remove(horario);
-    }
+    return comp;
   }
 }

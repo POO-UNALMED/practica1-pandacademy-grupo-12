@@ -3,7 +3,6 @@ package gestorAplicacion;
 import java.io.Serializable;
 import java.util.*;
 
-
 public class Profesor extends Persona implements Serializable {
   public static ArrayList<Profesor> profesores = new ArrayList<>();
   private ArrayList<Horario> asesoria = new ArrayList<>();
@@ -51,12 +50,12 @@ public class Profesor extends Persona implements Serializable {
     this.asesoria.add(asesoria);
   }
 
-  public void getHorario() {
-    System.out.println("Asesorias: ");
-    System.out.println(asignatura.getNombre());
+  public String getHorario() {
+    String comp = "Asesorias:\n" + asignatura.getNombre();
     for (int i = 0; i < asesoria.size(); i++) {
-      System.out.println(asesoria.get(i).toString());
+      comp = comp + asesoria.get(i).toString() + "\n";
     }
+    return comp;
   }
 
   public static Profesor Buscar(String nombre) {
@@ -70,8 +69,13 @@ public class Profesor extends Persona implements Serializable {
   }
 
   public String toString() {
-    String comp = "NOMBRE: " + this.getNombre() + "\n" + "CORREO: " + this.getCorreo() + "\n" + "ASIGNATURA: "
-        + this.getAsignatura().getNombre() + "\n" + "DETALLES: " + this.getDetalles();
+    String comp = "NOMBRE: " + this.nombre + "\n" + "CORREO: " + this.correo + "\n" + "ASIGNATURA: ";
+    if (this.asignatura != null) {
+      comp = comp + this.asignatura.getNombre() + "\n" + "DETALLES: " + this.detalles;
+    }
+    else{
+      comp = comp + "\n" + "DETALLES: " + this.detalles;
+    }
     return comp;
   }
 }

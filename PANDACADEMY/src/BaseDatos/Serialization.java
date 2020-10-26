@@ -12,23 +12,28 @@ import java.util.ArrayList;
 public class Serialization{ 
 	
 	static File archivo = new File("");
-	static ArrayList<ArrayList> objetos = new ArrayList<>();
 	
-	public static void serializar() {
-		objetos.add(Profesor.profesores);
-		objetos.add(Nota.notas);
-		objetos.add(Asignatura.asignaturas);
-		objetos.add(Calificacion.calificaciones);
-		objetos.add(Horario.horarios);
-		
+	public static void serializarE(Estudiante est) {
 		try {
 			FileOutputStream f = new FileOutputStream("personas.txt");
 			ObjectOutputStream o = new ObjectOutputStream(f);
-				
-			for (int i=0; i<objetos.size(); i++) {
-				o.writeObject(objetos.get(i));
-			}
-			
+
+			o.writeObject(est);
+
+			o.close();
+			f.close();
+		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
+		}
+	}
+
+	public static void serializarP() {
+		try {
+			FileOutputStream f = new FileOutputStream("profesores.txt");
+			ObjectOutputStream o = new ObjectOutputStream(f);
+
+			o.writeObject(Profesor.profesores);
+
 			o.close();
 			f.close();
 		} catch (FileNotFoundException e) {

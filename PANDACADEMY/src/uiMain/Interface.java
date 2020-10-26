@@ -9,47 +9,31 @@ import BaseDatos.*;
 import gestorAplicacion.*;
 
 public class Interface {
-	
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args){
-		/*new Profesor("Ernesto", "no tiene", "tampoco tiene", new Asignatura());
-		new Profesor("Jona", "than", "xD", new Asignatura());
-		new Nota(38, 2);
-		new Nota(25, 5);
-		Serialization.serializar();*/
-		
-		Deserialization.deserializar();
-		System.out.println("\n"+Deserialization.objetos);
-		
-		System.out.println("\n"+Profesor.profesores);
-		
-		for (int i=0; i < Deserialization.objetos.get(0).size(); i++) {
-			Profesor.profesores.add((Profesor)Deserialization.objetos.get(0).get(i));
-		}
-		for (int i=0; i < Deserialization.objetos.get(1).size(); i++) {
-			Nota.notas.add((Nota)Deserialization.objetos.get(1).get(i));
-		}
-		
-		System.out.println("\n"+Profesor.profesores);
-	}
 
-  /*public static void main(String[] args) throws IOException {
-    Estudiante e = new Estudiante();
+  @SuppressWarnings("unchecked")
+  public static void main(String[] args) throws IOException {
+    Estudiante e = Deserialization.deserializarE();
+    Profesor.profesores = Deserialization.deserializarP();
+
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     System.out.println("=====PANDACADEMY=====");
-    // aca podemos usar un metodo para ver si existen datos guardados para omitir lo
-    // que sigue
-    System.out.println("BIENVENIDO \n POR FAVOR INGRESE SU NOMBRE: ");
-    String entrada = br.readLine();
-    e.setNombre(entrada);
-    System.out.println("INGRESE SU DOCUMENTO DE IDENTIDAD(OPCIONAL): ");
-    entrada = br.readLine();
-    if (!entrada.equals("")) {
-      e.setDni(Long.parseLong(entrada));
+    if (e == null) {
+      e = new Estudiante();
+      System.out.println("BIENVENIDO \n POR FAVOR INGRESE SU NOMBRE: ");
+      String entrada = br.readLine();
+      e.setNombre(entrada);
+      System.out.println("INGRESE SU DOCUMENTO DE IDENTIDAD(OPCIONAL): ");
+      entrada = br.readLine();
+      if (!entrada.equals("")) {
+        try {
+          e.setDni(Long.parseLong(entrada));
+        } catch (Exception x) {
+          System.out.println("ENTRADA NO VALIDA");
+        }
+      }
+      System.out.println("INGRESE SU CORREO(OPCIONAL): ");
+      e.setCorreo(br.readLine()); // el usuario ingresa sus datos personales
     }
-    System.out.println("INGRESE SU CORREO(OPCIONAL): ");
-    e.setCorreo(br.readLine()); // el usuario ingresa sus datos personales
-
     int comando = 0, comando1, comando2, comando3 = 0;
     String nombre, det, correo, dia, h1, h2, creditos, profesor;
 
@@ -97,7 +81,7 @@ public class Interface {
                       break;
                     case 1:
                       System.out.println("\nDIGITE EL NUEVO DOCUMENTO DE IDENTIDAD: ");
-                      e.setDni(Integer.parseInt(br.readLine()));
+                      e.setDni(Long.parseLong(br.readLine()));
                       break;
                     case 2:
                       System.out.println("\nDIGITE EL NUEVO CORREO: ");
@@ -156,9 +140,12 @@ public class Interface {
                     break;
                   }
                 }
-
-                e.addAsignatura(new Asignatura(Integer.parseInt(creditos), nombre, new Profesor(profesor), det));
-                e.getAsignatura(nombre).getProfesor().setAsignatura(e.getAsignatura(nombre));
+                if (profesor.equals("")) {
+                  e.addAsignatura(new Asignatura(Integer.parseInt(creditos), nombre, det));
+                } else {
+                  e.addAsignatura(new Asignatura(Integer.parseInt(creditos), nombre, new Profesor(profesor), det));
+                  e.getAsignatura(nombre).getProfesor().setAsignatura(e.getAsignatura(nombre));
+                }
 
                 System.out.println("\nINGRESE NUMERO DE CLASES SEMANALES:   ");
                 int j = Integer.parseInt(br.readLine());
@@ -324,7 +311,7 @@ public class Interface {
                 if (!e.getAsignaturas().isEmpty()) {
                   for (int i = 0; i < e.getAsignaturas().size(); i++) {
                     try {
-                      System.out.println(e.getAsignatura(i).getNombre()+"\n"+e.getAsignatura(i).mostrarHorario());
+                      System.out.println(e.getAsignatura(i).getNombre() + "\n" + e.getAsignatura(i).mostrarHorario());
                     } catch (Exception x) {
                       System.out.println("\n" + e.getAsignatura(i).getNombre() + "NO TIENES HORARIOS ASIGNADOS\n");
                     }
@@ -382,16 +369,26 @@ public class Interface {
 
                   switch (comando2) {
                     case 0:
+                      String asignatura2;
                       Asignatura asignatura;
                       System.out.println("\nNOMBRE: ");
                       nombre = br.readLine();
                       System.out.println("\nCORREO: ");
                       correo = br.readLine();
                       System.out.println("\nASIGANTURA: ");
-                      asignatura = e.getAsignatura(br.readLine());
+                      asignatura2 = br.readLine();
+                      asignatura = e.getAsignatura(asignatura2);
                       System.out.println("\nDETALLES: ");
                       det = br.readLine();
-                      new Profesor(nombre, correo, det, asignatura);
+                      if (asignatura != null) {
+                        new Profesor(nombre, correo, det, asignatura);
+                      } else if (!asignatura2.equals("")) {
+                        asignatura = new Asignatura(asignatura2);
+                        new Profesor(nombre, correo, det, asignatura);
+                        e.addAsignatura(asignatura);
+                      } else {
+                        new Profesor(nombre, correo, det, null);
+                      }
                       System.out.println("\nPROFESOR CREADO\n");
                       System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
                       br.readLine();
@@ -403,8 +400,10 @@ public class Interface {
                       boolean aux = false;
                       for (int i = 0; i < Profesor.profesores.size(); i++) {
                         Profesor p = Profesor.profesores.get(i);
-                        if (p.getNombre().equalsIgnoreCase(nombre)) {
-                          p.getAsignatura().setProfesor(null);
+                        if (p.getNombre().equalsIgnoreCase(nombre) || p.getNombre().indexOf(nombre) >= 0) {
+                          if (p.getAsignatura() != null) {
+                            p.getAsignatura().setProfesor(null);
+                          }
                           Profesor.profesores.remove(i);
                           System.out.println("\nPROFESOR BORRADO\n");
                           aux = true;
@@ -451,8 +450,15 @@ public class Interface {
 
                             case 2:
                               System.out.println("\nINGRESE LA NUEVA ASIGNATURA: ");
-                              asignatura = e.getAsignatura(br.readLine());
-                              p.setAsignatura(asignatura);
+                              nombre = br.readLine();
+                              asignatura = e.getAsignatura(nombre);
+                              if (asignatura != null) {
+                                p.setAsignatura(asignatura);
+                              } else {
+                                asignatura = new Asignatura(nombre);
+                                p.setAsignatura(asignatura);
+                                e.addAsignatura(asignatura);
+                              }
                               System.out.println("\nCAMBIO REALIZADO\nPRESIONE <ENTER> PARA CONTINUAR");
                               br.readLine();
                               break;
@@ -507,5 +513,7 @@ public class Interface {
           }
       }
     }
-  }*/
+    Serialization.serializarE(e);
+    Serialization.serializarP();
+  }
 }

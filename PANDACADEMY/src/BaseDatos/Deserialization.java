@@ -9,25 +9,43 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import gestorAplicacion.Estudiante;
+import gestorAplicacion.Profesor;
+
 public class Deserialization {
 	static File archivo = new File("");
-	public static ArrayList<ArrayList> objetos = new ArrayList<>();
 
-	public static void deserializar() {
+	public static Estudiante deserializarE() {
+		Estudiante est;
 		try {
 			FileInputStream f = new FileInputStream("personas.txt");
 			ObjectInputStream o = new ObjectInputStream(f);
-				
-			while(true) {
-				ArrayList<Object> lista = (ArrayList) o.readObject();
-				System.out.println(lista);
-				objetos.add(lista);
-			}
-			
-		} catch(ClassNotFoundException e) {
+
+			est = (Estudiante) o.readObject();
+
+			return est;
+
+		} catch (ClassNotFoundException e) {
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
 		}
+		return null;
 	}
 
+	public static ArrayList<Profesor> deserializarP() {
+		ArrayList<Profesor> p = new ArrayList<>();
+		try {
+			FileInputStream f = new FileInputStream("profesores.txt");
+			ObjectInputStream o = new ObjectInputStream(f);
+
+			p = (ArrayList<Profesor>) o.readObject();
+
+			return p;
+
+		} catch (ClassNotFoundException e) {
+		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
+		}
+		return p;
+	}
 }
