@@ -11,14 +11,14 @@ import gestorAplicacion.*;
 public class Interface {
 	
 	@SuppressWarnings("unchecked")
-	public static void main(String[] args){
-		/*new Profesor("Ernesto", "no tiene", "tampoco tiene", new Asignatura());
+	/*public static void main(String[] args){
+		new Profesor("Ernesto", "no tiene", "tampoco tiene", new Asignatura());
 		new Profesor("Jona", "than", "xD", new Asignatura());
 		new Nota(38, 2);
 		new Nota(25, 5);
-		Serialization.serializar();*/
 		
-		Deserialization.deserializar();
+		
+		
 		System.out.println("\n"+Deserialization.objetos);
 		
 		System.out.println("\n"+Profesor.profesores);
@@ -31,9 +31,9 @@ public class Interface {
 		}
 		
 		System.out.println("\n"+Profesor.profesores);
-	}
+	}*/
 
-  /*public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException {
     Estudiante e = new Estudiante();
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     System.out.println("=====PANDACADEMY=====");
@@ -56,6 +56,7 @@ public class Interface {
     // menu principal de la aplicacion
     System.out.println(" \n" + e.getNombre().toUpperCase());
     while (comando != 5) {
+    	Deserialization.deserializar();
 
       System.out.println(
           "\n=====MENU PRINCIPAL=====\n[0] PERFIL\n[1] ASIGNATURAS\n[2] NOTAS\n[3] HORARIO\n[4] PROFESORES\n[5] SALIR\n");
@@ -454,5 +455,6 @@ public class Interface {
           }
       }
     }
-  }*/
+    Serialization.serializar(e);
+  }
 }

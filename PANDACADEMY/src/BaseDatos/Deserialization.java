@@ -1,6 +1,5 @@
 package BaseDatos;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,25 +8,25 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class Deserialization {
-	static File archivo = new File("");
-	public static ArrayList<ArrayList> objetos = new ArrayList<>();
+import gestorAplicacion.Estudiante;
 
-	public static void deserializar() {
+public class Deserialization {
+
+	public static Estudiante deserializar() {
+		Estudiante estudiante = null;
 		try {
 			FileInputStream f = new FileInputStream("personas.txt");
 			ObjectInputStream o = new ObjectInputStream(f);
 				
-			while(true) {
-				ArrayList<Object> lista = (ArrayList) o.readObject();
-				System.out.println(lista);
-				objetos.add(lista);
-			}
+			estudiante = (Estudiante) o.readObject();
 			
-		} catch(ClassNotFoundException e) {
+			
+			
+		} catch (ClassNotFoundException e) {
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
 		}
+		return estudiante;
 	}
 
 }

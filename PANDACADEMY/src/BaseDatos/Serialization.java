@@ -11,23 +11,13 @@ import java.util.ArrayList;
 
 public class Serialization{ 
 	
-	static File archivo = new File("");
-	static ArrayList<ArrayList> objetos = new ArrayList<>();
-	
-	public static void serializar() {
-		objetos.add(Profesor.profesores);
-		objetos.add(Nota.notas);
-		objetos.add(Asignatura.asignaturas);
-		objetos.add(Calificacion.calificaciones);
-		objetos.add(Horario.horarios);
+	public static void serializar(Estudiante estudiante) {
 		
 		try {
 			FileOutputStream f = new FileOutputStream("personas.txt");
 			ObjectOutputStream o = new ObjectOutputStream(f);
 				
-			for (int i=0; i<objetos.size(); i++) {
-				o.writeObject(objetos.get(i));
-			}
+			o.writeObject(estudiante);
 			
 			o.close();
 			f.close();
