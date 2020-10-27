@@ -23,8 +23,11 @@ public class PlanEstudio {
 		this.creditosR = creditosR;
 	}
 	
-	public String avanceCarrera(){
-				
+	public String avanceCarrera(Estudiante estudiante){
+		int creditosAp=0;
+		for(int i=0; i<0; i++) {
+			creditosAp += estudiante.semestres.get(i).creditosAprobados();
+		}
 		
 	}
 

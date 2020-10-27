@@ -4,14 +4,15 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Estudiante extends Persona implements Serializable{
-  private String planDeEstudio;
+  private PlanEstudio planDeEstudio;
   private ArrayList<Asignatura> asignaturas = new ArrayList<>();
+  public ArrayList<Semestre> semestres = new ArrayList<>();
 
-  public void setPlanDeEstudo(String planDeEstudio) {
+  public void setPlanDeEstudo(PlanEstudio planDeEstudio) {
     this.planDeEstudio = planDeEstudio;
   }
 
-  public String getPlanDeEstudio() {
+  public PlanEstudio getPlanDeEstudio() {
     return planDeEstudio;
   }
 
