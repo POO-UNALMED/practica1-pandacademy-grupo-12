@@ -18,7 +18,7 @@ public class Deserialization {
 	public static Estudiante deserializarE() {
 		Estudiante est;
 		try {
-			FileInputStream f = new FileInputStream("personas.txt");
+			FileInputStream f = new FileInputStream(archivo.getAbsolutePath()+"\\PANDACADEMY\\src\\BaseDatos\\profesores.txt");
 			ObjectInputStream o = new ObjectInputStream(f);
 
 			est = (Estudiante) o.readObject();
@@ -35,7 +35,7 @@ public class Deserialization {
 	public static ArrayList<Profesor> deserializarP() {
 		ArrayList<Profesor> p = new ArrayList<>();
 		try {
-			FileInputStream f = new FileInputStream("profesores.txt");
+			FileInputStream f = new FileInputStream(archivo.getAbsolutePath()+"\\PANDACADEMY\\src\\BaseDatos\\profesores.txt");
 			ObjectInputStream o = new ObjectInputStream(f);
 
 			p = (ArrayList<Profesor>) o.readObject();

@@ -121,7 +121,70 @@ public class Interface {
                 break;
 
               case 1:
-                // menu de editar asignatura
+                comando2 = 0;
+                while (comando2 != 9) {
+                  System.out.println("\n===EDITAR ASIGNATURAS===\nNOMBRE DE LA ASIGNATURA QUE DESEA EDITAR: ");
+                  nombre = br.readLine();
+                  Asignatura asg = e.getAsignatura(nombre);
+                  if (asg != null) {
+                    System.out.println(
+                        "\n===EDITAR ASIGNATURAS===\n[0] CREDITOS\n[1] NOMBRE\n[2] PROFESOR\n[3] CALIFICACIONES\n[4] HORARIO\n[5] DETALLES\n[9] VOLVER");
+                    comando2 = Integer.parseInt(br.readLine());
+
+                    switch (comando2) {
+                      case 0:
+                        System.out.println("CREDITOS:\n");
+                        creditos = br.readLine();
+                        asg.setCreditos(Integer.parseInt(creditos));
+                        System.out.println("\nCAMBIO REALIZADO\nPRESIONE <ENTER> PARA CONTINUAR");
+                        br.readLine();
+                        break;
+
+                      case 1:
+                        System.out.println("NOMBRE:\n");
+                        nombre = br.readLine();
+                        asg.setNombre(nombre);
+                        System.out.println("\nCAMBIO REALIZADO\nPRESIONE <ENTER> PARA CONTINUAR");
+                        br.readLine();
+                        break;
+
+                      case 2:
+                        System.out.println("NUEVO PROFESOR:\n");
+                        profesor = br.readLine();
+                        Profesor p = Profesor.Buscar(profesor);
+                        if (p != null) {
+                          asg.setProfesor(p);
+                        } else {
+                          p = new Profesor(nombre, "", "", asg);
+                        }
+                        System.out.println("\nCAMBIO REALIZADO\nPRESIONE <ENTER> PARA CONTINUAR");
+                        br.readLine();
+                        break;
+
+                      case 3:
+                        comando3 = 0;
+                        while (comando3 != 9) {
+                          // MENU PARA MODIFICAR NOTAS, DE LA FORMA EN LA QUE SE HABIA IMPLEMENTADO LA
+                          // CALCULADORA
+                        }
+                        break;
+                      case 4:
+                        // menu para modificar el horario, agregar nuevos horarios o modificar uno
+                        // existente
+                        break;
+                      case 5:
+                      System.out.println("DETALLES:\n");
+                        det = br.readLine();
+                        asg.setDetalles(det);
+                        System.out.println("\nCAMBIO REALIZADO\nPRESIONE <ENTER> PARA CONTINUAR");
+                        br.readLine();
+                        break;
+                    }
+                  } else {
+
+                  }
+                }
+
                 break;
               case 2:
 
