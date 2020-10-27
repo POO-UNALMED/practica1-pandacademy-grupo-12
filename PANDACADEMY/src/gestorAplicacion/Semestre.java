@@ -17,11 +17,13 @@ public class Semestre {
 
 	public float promedioSemetre() {
 		float p = 0;
+		int c = 0;
 		for (int i = 0; i < asignaturas.size(); i++) {
 			Asignatura m = asignaturas.get(i);
-			p = p + (m.promedioAsignatura() * m.getCreditos());
+			p =+ m.promedioAsignatura() * m.getCreditos();
+			c =+ m.getCreditos();
 		}
-		return p;
+		return p/c;
 	}
 
 	public int creditosAprobados() {
@@ -54,6 +56,10 @@ public class Semestre {
 
 	public Asignatura getAsignatura(int index) {
 		return asignaturas.get(index);
+	}
+
+	public ArrayList<Asignatura> getAsignaturas() {
+		return asignaturas;
 	}
 
 	public Asignatura getAsignatura(String nombre) {

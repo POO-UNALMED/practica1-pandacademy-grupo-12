@@ -1,4 +1,6 @@
 package gestorAplicacion;
+import java.util.ArrayList;
+
 import BaseDatos.*;
 
 public class PlanEstudio {
@@ -25,8 +27,9 @@ public class PlanEstudio {
 	
 	public String avanceCarrera(Estudiante estudiante){
 		int creditosAp=0;
-		for(int i=0; i<0; i++) {
-			creditosAp += estudiante.semestres.get(i).creditosAprobados();
+		ArrayList<Semestre> s = estudiante.getSemestres();
+		for (int i = 0; i < s.size(); i++) {
+			creditosAp += s.get(i).creditosAprobados();
 		}
 		return ((creditosAp / this.creditosR)+" %");
 		

@@ -3,10 +3,9 @@ package gestorAplicacion;
 import java.io.Serializable;
 import java.util.*;
 
-public class Estudiante extends Persona implements Serializable{
+public class Estudiante extends Persona implements Serializable {
   private PlanEstudio planDeEstudio;
-  private ArrayList<Asignatura> asignaturas = new ArrayList<>();
-  public ArrayList<Semestre> semestres = new ArrayList<>();
+  private ArrayList<Semestre> semestres = new ArrayList<>();
 
   public void setPlanDeEstudo(PlanEstudio planDeEstudio) {
     this.planDeEstudio = planDeEstudio;
@@ -16,43 +15,27 @@ public class Estudiante extends Persona implements Serializable{
     return planDeEstudio;
   }
 
-  public ArrayList<Asignatura> getAsignaturas() {
-    return asignaturas;
-  }
-
-  public Asignatura getAsignatura(String nombre) {
-    for (int i = 0; i < asignaturas.size(); i++) {
-      Asignatura m = asignaturas.get(i);
-      if (m.getNombre().equalsIgnoreCase(nombre)) {
-        return m;
-      }
-    }
-    return null;
-  }
-
-  public Asignatura getAsignatura(int index) {
-    return asignaturas.get(index);
+  public ArrayList<Semestre> getSemestres() {
+    return semestres;
   }
 
   public float getPAPA() {
     float total = 0;
-    int totalCreditos = 0;
-    for (int i = 0; i < asignaturas.size(); i++) {
-      total += (asignaturas.get(i).promedioAsignatura()) * (asignaturas.get(i).getCreditos());
-      totalCreditos += asignaturas.get(i).getCreditos();
+    for (int i = 0; i < semestres.size(); i++) {
+      Semestre s = semestres.get(i);
+      total += s.promedioSemetre();
     }
-    return (total / totalCreditos);
-  }
-
-  public void addAsignatura(Asignatura asignatura) {
-    this.asignaturas.add(asignatura);
+    total /= semestres.size();
+    return total;
   }
 
   public String getHorario() {
     String comp = "";
-    for (int i = 0; i < asignaturas.size(); i++) {
-      comp = comp + asignaturas.get(i).getNombre()+"\n"+
-      asignaturas.get(i).mostrarHorario();
+    Semestre ultimoSemestre = semestres.get(semestres.size() - 1);
+    for (int i = 0; i < ultimoSemestre.getAsignaturas().size(); i++) {
+
+      comp = comp + ultimoSemestre.getAsignaturas().get(i).getNombre() + "\n"
+          + ultimoSemestre.getAsignaturas().get(i).mostrarHorario();
     }
     return comp;
   }
