@@ -28,6 +28,7 @@ public class PlanEstudio {
 		for(int i=0; i<0; i++) {
 			creditosAp += estudiante.semestres.get(i).creditosAprobados();
 		}
+		return ((creditosAp / this.creditosR)+" %");
 		
 	}
 
