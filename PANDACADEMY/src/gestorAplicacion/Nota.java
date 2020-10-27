@@ -1,6 +1,8 @@
-package src.gestorAplicacion;
+package gestorAplicacion;
 
-public class Nota {
+import java.io.Serializable;
+
+public class Nota implements Serializable{
   private float porcentaje;
   private float calificaciones;
 

@@ -1,8 +1,9 @@
-package src.gestorAplicacion;
+package gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Estudiante extends Persona {
+public class Estudiante extends Persona implements Serializable{
   private String planDeEstudio;
   private ArrayList<Asignatura> asignaturas = new ArrayList<>();
 
@@ -14,7 +15,7 @@ public class Estudiante extends Persona {
     return planDeEstudio;
   }
 
-  public List<Asignatura> getAsignatura() {
+  public ArrayList<Asignatura> getAsignaturas() {
     return asignaturas;
   }
 
@@ -23,19 +24,20 @@ public class Estudiante extends Persona {
       Asignatura m = asignaturas.get(i);
       if (m.getNombre().equalsIgnoreCase(nombre)) {
         return m;
-      } else {
-        System.out.println("Esta asignatura no se encuentra.");
       }
     }
     return null;
+  }
+
+  public Asignatura getAsignatura(int index) {
+    return asignaturas.get(index);
   }
 
   public float getPAPA() {
     float total = 0;
     int totalCreditos = 0;
     for (int i = 0; i < asignaturas.size(); i++) {
-      total +=
-        (asignaturas.get(i).promedioAsignatura()) * (asignaturas.get(i).getCreditos());
+      total += (asignaturas.get(i).promedioAsignatura()) * (asignaturas.get(i).getCreditos());
       totalCreditos += asignaturas.get(i).getCreditos();
     }
     return (total / totalCreditos);
@@ -45,10 +47,12 @@ public class Estudiante extends Persona {
     this.asignaturas.add(asignatura);
   }
 
-  public void getHorario() {
+  public String getHorario() {
+    String comp = "";
     for (int i = 0; i < asignaturas.size(); i++) {
-      System.out.println(asignaturas.get(i).getNombre());
+      comp = comp + asignaturas.get(i).getNombre()+"\n"+
       asignaturas.get(i).mostrarHorario();
     }
+    return comp;
   }
 }
