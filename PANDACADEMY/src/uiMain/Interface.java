@@ -128,7 +128,7 @@ public class Interface {
                   Asignatura asg = e.getAsignatura(nombre);
                   if (asg != null) {
                     System.out.println(
-                        "\n===EDITAR ASIGNATURAS===\n[0] CREDITOS\n[1] NOMBRE\n[2] PROFESOR\n[3] CALIFICACIONES\n[4] HORARIO\n[5] DETALLES\n[9] VOLVER");
+                        "\n===EDITAR ASIGNATURAS===\n[0] CREDITOS\n[1] NOMBRE\n[2] PROFESOR\n[3] NOTAS\n[4] HORARIO\n[5] DETALLES\n[9] VOLVER");
                     comando2 = Integer.parseInt(br.readLine());
 
                     switch (comando2) {
@@ -164,8 +164,11 @@ public class Interface {
                       case 3:
                         comando3 = 0;
                         while (comando3 != 9) {
-                          // MENU PARA MODIFICAR NOTAS, DE LA FORMA EN LA QUE SE HABIA IMPLEMENTADO LA
-                          // CALCULADORA
+                        	comando3 = Integer.parseInt(br.readLine());
+                        	System.out.println(
+                                    "\n===EDITAR NOTAS===\n[0] EDITAR NOTAS\n[1] AGREGAR NOTAS\n[2] ELIMINAR NOTAS\n[9] VOLVER");
+                        	
+                        	
                         }
                         break;
                       case 4:
@@ -180,7 +183,10 @@ public class Interface {
                         br.readLine();
                         break;
                     }
-                  } else {
+                  } 
+                  else {
+                	  System.out.println("NO TIENES ASIGNATURAS");
+                	  break;
 
                   }
                 }
@@ -275,7 +281,7 @@ public class Interface {
                 ArrayList<Asignatura> asig = e.getAsignaturas();
                 if (asig.size() != 0) {
                   for (int i = 0; i < asig.size(); i++) {
-                    if (!asig.get(i).getCalificaciones().getNotas().isEmpty()) {
+                    if (asig.get(i).getCalificaciones()!= null && !asig.get(i).getCalificaciones().getNotas().isEmpty()) {
                       System.out.println(asig.get(i).getNombre() + ": \n" + asig.get(i).mostrarNotas() + "\n");
                     } else {
                       System.out.println("\nNO TIENES NINGUNA NOTA");

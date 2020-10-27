@@ -1,5 +1,5 @@
 package BaseDatos;
-import src.gestorAplicacion.*;
+import gestorAplicacion.*;
 
 import java.io.EOFException;
 import java.io.File;
@@ -16,7 +16,7 @@ public class Serialization{
 	public static void serializarE(Estudiante est) {
 		System.out.println(archivo.getAbsolutePath());
 		try {
-			FileOutputStream f = new FileOutputStream(archivo.getAbsolutePath()+"\\PANDACADEMY\\src\\BaseDatos\\persona.txt");
+			FileOutputStream f = new FileOutputStream(archivo.getAbsolutePath()+"\\src\\BaseDatos\\persona.txt");
 			ObjectOutputStream o = new ObjectOutputStream(f);
 
 			o.writeObject(est);
@@ -30,7 +30,7 @@ public class Serialization{
 
 	public static void serializarP() {
 		try {
-			FileOutputStream f = new FileOutputStream(archivo.getAbsolutePath()+"\\PANDACADEMY\\src\\BaseDatos\\profesores.txt");
+			FileOutputStream f = new FileOutputStream(archivo.getAbsolutePath()+"\\src\\BaseDatos\\profesores.txt");
 			ObjectOutputStream o = new ObjectOutputStream(f);
 
 			o.writeObject(Profesor.profesores);
