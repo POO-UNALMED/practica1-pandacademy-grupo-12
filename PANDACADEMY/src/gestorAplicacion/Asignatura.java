@@ -9,7 +9,6 @@ public class Asignatura implements Serializable {
   private String nombre;
   private Profesor profesor;
   private Calificacion calificaciones;
-  private ArrayList<Horario> horarios = new ArrayList<>();
   private String detalles;
 
   // constructores
@@ -64,22 +63,6 @@ public class Asignatura implements Serializable {
     return this.calificaciones;
   }
 
-  public void setHorario(ArrayList<Horario> h) {
-    this.horarios = h;
-  }
-
-  public void addHorario(Horario h) {
-    this.horarios.add(h);
-  }
-
-  public ArrayList<Horario> getHorarios() {
-    return this.horarios;
-  }
-
-  public Horario getHorario(int i) {
-    return this.horarios.get(i);
-  }
-
   public void setDetalles(String text) {
     this.detalles = text;
   }
@@ -112,13 +95,5 @@ public class Asignatura implements Serializable {
   public float promedioAsignatura() {
     Calificacion n = this.getCalificaciones();
     return n.promedio();
-  }
-
-  public String mostrarHorario() {
-    String comp = "";
-    for (int i = 0; i < this.getHorarios().size(); i++) {
-      comp = comp + this.getHorario(i).toString() + "\n";
-    }
-    return comp;
   }
 }

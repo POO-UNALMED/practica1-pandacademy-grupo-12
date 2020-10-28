@@ -2,21 +2,24 @@ package gestorAplicacion;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class Semestre implements Serializable {
+public class Semestre implements Serializable, Comparable<Semestre> {
 
-	private static ArrayList<Profesor> profesores = new ArrayList<>();
 	private String nombre;
+	private static ArrayList<Profesor> profesores = new ArrayList<>();
 	private ArrayList<Asignatura> asignaturas = new ArrayList<>();
+	private ArrayList<Horario> horarios = new ArrayList<>();
 
-	public Semestre(String nombre){
+	public Semestre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Semestre(){
+
+	public Semestre() {
 	}
 
 	public ArrayList<Profesor> profesores() {
-		return profesores;	
+		return profesores;
 	}
 
 	public void setprofesores(ArrayList<Profesor> p) {
@@ -36,18 +39,17 @@ public class Semestre implements Serializable {
 		int c = 0;
 		for (int i = 0; i < asignaturas.size(); i++) {
 			Asignatura m = asignaturas.get(i);
-			p =+ m.promedioAsignatura() * m.getCreditos();
-			c =+ m.getCreditos();
+			p = +m.promedioAsignatura() * m.getCreditos();
+			c = +m.getCreditos();
 		}
-		return p/c;
+		return p / c;
 	}
 
 	public int creditosAprobados() {
 		int total = 0;
-		for (int i = 0; i < asignaturas.size(); i++) {
-			Asignatura m = asignaturas.get(i);
-			if (m.estadoAsignatura().indexOf("Aprobada") == 0) {
-				total = total + m.getCreditos();
+		for (Asignatura asignatura : asignaturas) {
+			if (asignatura.getCalificaciones().promedio() >= 3) {
+				total += asignatura.getCreditos();
 			}
 		}
 		return total;
@@ -88,4 +90,26 @@ public class Semestre implements Serializable {
 		return null;
 	}
 
+	@Override
+	public int compareTo(Semestre s) {
+		String a = new String(String.valueOf(this.getNombre()));
+		String b = new String(String.valueOf(s.getNombre()));
+		return a.compareTo(b);
+	}
+
+	public void setHorario(ArrayList<Horario> h) {
+		this.horarios = h;
+	}
+
+	public void addHorario(Horario h) {
+		horarios.add(h);
+	}
+
+	public ArrayList<Horario> getHorarios() {
+		return this.horarios;
+	}
+
+	public Horario getHorario(int i) {
+		return this.horarios.get(i);
+	}
 }

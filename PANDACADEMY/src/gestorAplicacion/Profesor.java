@@ -49,12 +49,13 @@ public class Profesor extends Persona implements Serializable {
     this.asesoria.add(asesoria);
   }
 
-  public String getHorario() {
-    String comp = "Asesorias:\n" + asignatura.getNombre();
+  public Horario getHorario(String dia) {
     for (int i = 0; i < asesoria.size(); i++) {
-      comp = comp + asesoria.get(i).toString() + "\n";
+      if (asesoria.get(i).getDia().equalsIgnoreCase(dia)) {
+        return asesoria.get(i);
+      }
     }
-    return comp;
+    return null;
   }
 
   public static Profesor Buscar(String nombre, Semestre s) {

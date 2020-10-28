@@ -4,15 +4,24 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Estudiante extends Persona implements Serializable {
-  private PlanEstudio planDeEstudio;
+  private String planDeEstudio;
+  private int creditosR;
   private ArrayList<Semestre> semestres = new ArrayList<>();
 
-  public void setPlanDeEstudo(PlanEstudio planDeEstudio) {
+  public void setPlanDeEstudo(String planDeEstudio) {
     this.planDeEstudio = planDeEstudio;
   }
 
-  public PlanEstudio getPlanDeEstudio() {
+  public String getPlanDeEstudio() {
     return planDeEstudio;
+  }
+
+  public void setCreditosR(int c) {
+    creditosR = c;
+  }
+
+  public int getCreditosR() {
+    return creditosR;
   }
 
   public ArrayList<Semestre> getSemestres() {
@@ -20,7 +29,8 @@ public class Estudiante extends Persona implements Serializable {
   }
 
   public void addSemestre(Semestre semestre) {
-    this.semestres.add(semestre);
+    semestres.add(semestre);
+    Collections.sort(semestres);
   }
 
   public float getPAPA() {
@@ -33,14 +43,18 @@ public class Estudiante extends Persona implements Serializable {
     return total;
   }
 
-  public String getHorario() {
-    String comp = "";
-    Semestre ultimoSemestre = semestres.get(semestres.size() - 1);
-    for (int i = 0; i < ultimoSemestre.getAsignaturas().size(); i++) {
-
-      comp = comp + ultimoSemestre.getAsignaturas().get(i).getNombre() + "\n"
-          + ultimoSemestre.getAsignaturas().get(i).mostrarHorario();
+  public int avanceCarrera() {
+    float avance = 0;
+    int cap = 0;
+    if (creditosR > 0) {
+      for (Semestre semestre : semestres) {
+        cap += semestre.creditosAprobados();
+        System.out.println(cap);
+      }
+      avance = (float) cap/creditosR;
+      System.out.println(avance);
+      return Math.round(avance*100);
     }
-    return comp;
-  }
+    return (int) avance;
+	}
 }
