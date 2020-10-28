@@ -17,7 +17,6 @@ public class Deserialization {
 
 	public static Estudiante deserializarE() {
 		Estudiante est;
-		System.out.println(archivo.getAbsolutePath());
 		try {
 			FileInputStream f = new FileInputStream(archivo.getAbsolutePath()+"\\src\\BaseDatos\\persona.txt");
 			ObjectInputStream o = new ObjectInputStream(f);
@@ -33,20 +32,4 @@ public class Deserialization {
 		return null;
 	}
 
-	public static ArrayList<Profesor> deserializarP() {
-		ArrayList<Profesor> p = new ArrayList<>();
-		try {
-			FileInputStream f = new FileInputStream(archivo.getAbsolutePath()+"\\src\\BaseDatos\\profesores.txt");
-			ObjectInputStream o = new ObjectInputStream(f);
-
-			p = (ArrayList<Profesor>) o.readObject();
-
-			return p;
-
-		} catch (ClassNotFoundException e) {
-		} catch (FileNotFoundException e) {
-		} catch (IOException e) {
-		}
-		return p;
-	}
 }

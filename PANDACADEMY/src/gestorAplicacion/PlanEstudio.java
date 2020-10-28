@@ -1,15 +1,15 @@
 package gestorAplicacion;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import BaseDatos.*;
 
-public class PlanEstudio {
+public class PlanEstudio implements Serializable{
 	private String nombre;
 	private int creditosR;
 	
-	PlanEstudio (String nombre, int creditos){
+	public PlanEstudio (String nombre){
 		this.nombre=nombre;
-		this.creditosR=creditos;
 	}
 	
 	public String getNombre() {

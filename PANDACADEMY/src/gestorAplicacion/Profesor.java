@@ -4,26 +4,25 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Profesor extends Persona implements Serializable {
-  public static ArrayList<Profesor> profesores = new ArrayList<>();
   private ArrayList<Horario> asesoria = new ArrayList<>();
   private Asignatura asignatura;
   private String detalles;
 
-  public Profesor() {
-    profesores.add(this);
+  public Profesor(Semestre semestre) {
+    semestre.profesores().add(this);
   }
 
-  public Profesor(String nombre, String correo, String detalles, Asignatura asignatura) {
+  public Profesor(String nombre, String correo, String detalles, Asignatura asignatura, Semestre semestre) {
     this.nombre = nombre;
     this.correo = correo;
     this.detalles = detalles;
     this.asignatura = asignatura;
-    profesores.add(this);
+    semestre.profesores().add(this);
   }
 
-  public Profesor(String nombre) {
+  public Profesor(String nombre, Semestre semestre) {
     this.nombre = nombre;
-    profesores.add(this);
+    semestre.profesores().add(this);
   }
 
   public void setAsignatura(Asignatura asignatura) {
@@ -58,9 +57,9 @@ public class Profesor extends Persona implements Serializable {
     return comp;
   }
 
-  public static Profesor Buscar(String nombre) {
-    for (int i = 0; i < profesores.size(); i++) {
-      Profesor p = profesores.get(i);
+  public static Profesor Buscar(String nombre, Semestre s) {
+    for (int i = 0; i < s.profesores().size(); i++) {
+      Profesor p = s.profesores().get(i);
       if (p.getNombre().equalsIgnoreCase(nombre)) {
         return p;
       }

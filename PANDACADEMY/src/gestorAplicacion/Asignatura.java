@@ -21,16 +21,14 @@ public class Asignatura implements Serializable {
     this.nombre = nombre;
     this.profesor = p;
     this.detalles = det;
+    calificaciones = new Calificacion();
   }
 
   public Asignatura(int creditos, String nombre, String det) {
     this.creditos = creditos;
     this.nombre = nombre;
     this.detalles = det;
-  }
-
-  public Asignatura(String nombre) {
-    this.nombre = nombre;
+    calificaciones = new Calificacion();
   }
 
   // metodos get y set
@@ -60,7 +58,6 @@ public class Asignatura implements Serializable {
 
   public void setCalificaciones(Calificacion n) {
     this.calificaciones = n;
-    n.setAsignatura(this);
   }
 
   public Calificacion getCalificaciones() {
@@ -104,7 +101,7 @@ public class Asignatura implements Serializable {
   }
 
   public String mostrarNotas() {
-    String comp = "Tus notas de " + this.nombre + "son:\n";
+    String comp = "Tus notas de " + this.nombre + " son:\n";
     ArrayList<Nota> n = this.getCalificaciones().getNotas();
     for (int i = 0; i < n.size(); i++) {
       comp = comp + n.get(i).getNota() + " "; // imprime una lista de todas las notas

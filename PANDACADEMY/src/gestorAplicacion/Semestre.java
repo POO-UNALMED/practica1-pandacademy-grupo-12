@@ -1,11 +1,27 @@
 package gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Semestre {
+public class Semestre implements Serializable {
 
+	private static ArrayList<Profesor> profesores = new ArrayList<>();
 	private String nombre;
 	private ArrayList<Asignatura> asignaturas = new ArrayList<>();
+
+	public Semestre(String nombre){
+		this.nombre = nombre;
+	}
+	public Semestre(){
+	}
+
+	public ArrayList<Profesor> profesores() {
+		return profesores;	
+	}
+
+	public void setprofesores(ArrayList<Profesor> p) {
+		profesores = p;
+	}
 
 	public String getNombre() {
 		return nombre;

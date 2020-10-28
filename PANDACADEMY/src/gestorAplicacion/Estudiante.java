@@ -19,6 +19,10 @@ public class Estudiante extends Persona implements Serializable {
     return semestres;
   }
 
+  public void addSemestre(Semestre semestre) {
+    this.semestres.add(semestre);
+  }
+
   public float getPAPA() {
     float total = 0;
     for (int i = 0; i < semestres.size(); i++) {
