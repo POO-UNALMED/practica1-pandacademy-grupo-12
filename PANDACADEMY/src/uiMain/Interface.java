@@ -8,33 +8,29 @@ import java.util.ArrayList;
 import BaseDatos.*;
 import gestorAplicacion.*;
 
+/**
+ * @ Cristian Londoño
+ * @ Juan Pablo Gutierrez
+ */
 public class Interface {
   public static void main(String[] args) throws IOException {
     Estudiante e = Deserialization.deserializarE();
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     System.out.println("=====PANDACADEMY=====");
+    String nombre, dni, det, correo, dia, h1, h2, creditos, profesor;
     if (e == null) {
-      e = new Estudiante();
-      e.addSemestre(new Semestre("semestre 0"));
-      System.out.println("BIENVENIDO \n POR FAVOR INGRESE SU NOMBRE: ");
-      String entrada = br.readLine();
-      e.setNombre(entrada);
-      System.out.println("INGRESE SU DOCUMENTO DE IDENTIDAD(OPCIONAL): ");
-      entrada = br.readLine();
-      if (!entrada.equals("")) {
-        try {
-          e.setDni(Long.parseLong(entrada));
-        } catch (Exception x) {
-          System.out.println("ENTRADA NO VALIDA");
-        }
-      }
-      System.out.println("INGRESE SU CORREO(OPCIONAL): ");
-      e.setCorreo(br.readLine()); // el usuario ingresa sus datos personales
+      System.out.println("BIENVENIDO \n* CAMPO OBLIGATORIO\n POR FAVOR INGRESE SU NOMBRE*: ");
+      nombre = br.readLine();
+      System.out.println("INGRESE SU DOCUMENTO DE IDENTIDAD*: ");
+      dni = br.readLine();
+      System.out.println("INGRESE SU CORREO: ");
+      correo = br.readLine(); // el usuario ingresa sus datos personales
+      e = new Estudiante(Long.parseLong(dni), nombre, correo);
+      e.addSemestre(new Semestre("Semestre 0"));
     }
     Semestre sa = e.getSemestres().get(e.getSemestres().size() - 1); // ultimo semestre
     int comando = 0, comando1, comando2, comando3 = 0;
     boolean aux;
-    String nombre, det, correo, dia, h1, h2, creditos, profesor;
 
     // menu principal de la aplicacion
     System.out.println("\n" + e.getNombre().toUpperCase());
@@ -56,11 +52,8 @@ public class Interface {
 
             switch (comando1) {
               case 0:
-                System.out
-                    .println("\nNOMBRE: " + e.getNombre() + "\nDOCUMENTO DE IDENTIDAD: " + e.getDni() + "\nCORREO: "
-                        + e.getCorreo() + "\n" + "PLAN DE ESTUDIOS: " + e.getPlanDeEstudio() + "\n");
-                System.out
-                    .println("HAS COMPLETADO UN " + e.avanceCarrera() + " % DE TU PLAN DE ESTUDIO\n");
+                System.out.println(e.toString());
+                System.out.println("HAS COMPLETADO UN " + e.avanceCarrera() + " % DE TU PLAN DE ESTUDIO\n");
                 System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
                 br.readLine();
                 // automaticamente regresa al menu PERFIL
@@ -70,9 +63,8 @@ public class Interface {
                 comando2 = 0;
                 while (comando2 != 9) { // bucle para que se imprima el menú hasta que se ingrese 9
 
-                  System.out
-                      .println("\n===EDITAR MI PERFIL=== \n [0] EDITAR NOMBRE  \n [1] EDITAR DOCUMENTO DE IDENTIDAD \n "
-                          + "[2] EDITAR CORREO \n [3] EDITAR PLAN DE ESTUDIOS \n [9] VOLVER \n");
+                  System.out.println("\n===EDITAR MI PERFIL=== \n [0] EDITAR NOMBRE  \n"
+                      + "[1] EDITAR CORREO \n [2] EDITAR PLAN DE ESTUDIOS \n [9] VOLVER \n");
                   comando2 = Integer.parseInt(br.readLine());
 
                   switch (comando2) {
@@ -81,14 +73,10 @@ public class Interface {
                       e.setNombre(br.readLine());
                       break;
                     case 1:
-                      System.out.println("\nDIGITE EL NUEVO DOCUMENTO DE IDENTIDAD: ");
-                      e.setDni(Long.parseLong(br.readLine()));
-                      break;
-                    case 2:
                       System.out.println("\nDIGITE EL NUEVO CORREO: ");
                       e.setCorreo(br.readLine());
                       break;
-                    case 3:
+                    case 2:
                       System.out.println("\nDIGITE EL NUEVO PLAN DE ESTUDIO: ");
                       e.setPlanDeEstudo(br.readLine());
                       System.out.println("\nCREDITOS REQUERIDOS: ");
@@ -101,7 +89,7 @@ public class Interface {
           }
           break;// final del menu PERFIL
 
-        case 1:
+        case 1: // INICIO MENU ASIGNATURA
           comando1 = 0;
           while (comando1 != 9) {
             System.out.println(
@@ -154,11 +142,11 @@ public class Interface {
                       case 2:
                         System.out.println("NUEVO PROFESOR:\n");
                         profesor = br.readLine();
-                        Profesor p = Profesor.Buscar(profesor, sa);
+                        Profesor p = Profesor.Buscar(profesor);
                         if (p != null) {
                           asg.setProfesor(p);
                         } else {
-                          p = new Profesor(nombre, "", "", asg, sa);
+                          p = new Profesor(profesor, "", "", asg);
                         }
                         System.out.println("\nCAMBIO REALIZADO\nPRESIONE <ENTER> PARA CONTINUAR");
                         br.readLine();
@@ -168,10 +156,10 @@ public class Interface {
                         comando3 = 0;
                         while (comando3 != 9) {
                           System.out.println("\n===EDITAR NOTAS===\n");
-                          if (!asg.getCalificaciones().getNotas().isEmpty()) {
-                            for (int i = 0; i < asg.getCalificaciones().getNotas().size(); i++) {
-                              System.out.println(i + ". " + asg.getCalificaciones().getNotas().get(i).getNota() + " "
-                                  + asg.getCalificaciones().getNotas().get(i).getPorcentaje() * 100 + "% \n");
+                          if (!asg.getNotas().isEmpty()) {
+                            for (int i = 0; i < asg.getNotas().size(); i++) {
+                              System.out.println(i + ". " + asg.getNotas().get(i).getNota() + " "
+                                  + asg.getNotas().get(i).getPorcentaje() * 100 + "% \n");
                             }
                             aux = true;
                           } else {
@@ -187,10 +175,9 @@ public class Interface {
                                 System.out.println("INGRESE EL INDICE DE LA NOTA QUE DESEA MODIFICAR: \n");
                                 int i = Integer.parseInt(br.readLine());
                                 System.out.println("INGRESE LA NOTA: \n");
-                                asg.getCalificaciones().getNotas().get(i).setNota(Float.parseFloat(br.readLine()));
+                                asg.getNotas().get(i).setNota(Float.parseFloat(br.readLine()));
                                 System.out.println("INGRESE EL PORCENTAJE(%): \n");
-                                asg.getCalificaciones().getNotas().get(i)
-                                    .setPorcentaje(Float.parseFloat(br.readLine()) / 100);
+                                asg.getNotas().get(i).setPorcentaje(Float.parseFloat(br.readLine()) / 100);
                                 System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
                                 br.readLine();
                               } else {
@@ -201,33 +188,30 @@ public class Interface {
                               break;
 
                             case 1:
-                            
-                            	boolean au=true;
-                            	while (au) {
-	                              System.out.println("INGRESE NOTA: \n");
-	                              float nota = Float.parseFloat(br.readLine());
-	                              
-	                              
-	                              
-	                              System.out.println("INGRESE PORCENTAJE(%): ");
-	                              float porc = Float.parseFloat(br.readLine()) / 100;
-	                              
-	                              float c=0;
-	                              for (int i=0; i< asg.getCalificaciones().getNotas().size();i++) {
-	                            	  c= c + asg.getCalificaciones().getNotas().get(i).getPorcentaje();
-	                              }
-	                              if ( (c+porc)<=1 ) {
-	                            	  asg.getCalificaciones().getNotas().add(new Nota(porc, nota));
-	                            	  au=false;
-	                              }
-	                              else {
-	                            	  System.out.println("INGRESE UN PORCENTAJE VALIDO\n");
-	                                  System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
-	                                  br.readLine();
-	                              }
-	                              
-                            	}
-                                                               
+
+                              boolean au = true;
+                              while (au) {
+                                System.out.println("INGRESE NOTA: \n");
+                                float nota = Float.parseFloat(br.readLine());
+
+                                System.out.println("INGRESE PORCENTAJE(%): ");
+                                float porc = Float.parseFloat(br.readLine()) / 100;
+
+                                float c = 0;
+                                for (int i = 0; i < asg.getNotas().size(); i++) {
+                                  c = c + asg.getNotas().get(i).getPorcentaje();
+                                }
+                                if ((c + porc) <= 1) {
+                                  asg.getNotas().add(new Nota(porc, nota));
+                                  au = false;
+                                } else {
+                                  System.out.println("INGRESE UN PORCENTAJE VALIDO\n");
+                                  System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
+                                  br.readLine();
+                                }
+
+                              }
+
                               System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
                               br.readLine();
                               break;
@@ -235,7 +219,7 @@ public class Interface {
                             case 2:
                               if (aux) {
                                 System.out.println("INGRESE EL INDICE DE LA NOTA QUE DESEA ELIMINAR: ");
-                                asg.getCalificaciones().getNotas().remove(Integer.parseInt(br.readLine()));
+                                asg.getNotas().remove(Integer.parseInt(br.readLine()));
                                 System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
                                 br.readLine();
                               } else {
@@ -262,7 +246,8 @@ public class Interface {
                             case 0:
                               System.out.println("\nCUAL HORARIO DESEA MODIFICAR: ");
                               hEdit = Integer.parseInt(br.readLine());
-                              h.remove(hEdit);
+                              hEdit = sa.getHorarios().indexOf(h.get(hEdit));
+                              sa.getHorarios().remove(hEdit);
                               System.out.println("\nHORARIO BORRADO\nPRESIONE <ENTER> PARA CONTINUAR");
                               br.readLine();
                               break;
@@ -284,8 +269,9 @@ public class Interface {
                                 }
                               }
                               if (aux) {
-                                h.remove(hEdit);
-                                h.add(hEdit, Nh);
+                                hEdit = sa.getHorarios().indexOf(h.get(hEdit));
+                                sa.getHorarios().remove(hEdit);
+                                sa.getHorarios().add(hEdit, Nh);
                                 System.out.println("\nHORARIO AGREGADO\nPRESIONE <ENTER> PARA CONTINUAR");
                                 br.readLine();
                               } else {
@@ -309,7 +295,7 @@ public class Interface {
                                 }
                               }
                               if (aux) {
-                                h.add(new Horario(dia, h1, h2, asg));
+                                sa.getHorarios().add(new Horario(dia, h1, h2, asg));
                                 System.out.println("\nHORARIO AGREGADO\nPRESIONE <ENTER> PARA CONTINUAR");
                                 br.readLine();
                               } else {
@@ -317,9 +303,9 @@ public class Interface {
                                 br.readLine();
                               }
                               break;
-                              
+
                             case 9:
-                            	break;
+                              break;
 
                           }
                         } else {
@@ -399,7 +385,7 @@ public class Interface {
                     asg = new Asignatura(Integer.parseInt(creditos), nombre, det);
                     sa.addAsignatura(asg);
                   } else {
-                    asg = new Asignatura(Integer.parseInt(creditos), nombre, new Profesor(profesor, sa), det);
+                    asg = new Asignatura(Integer.parseInt(creditos), nombre, new Profesor(profesor), det);
                     sa.addAsignatura(asg);
                     sa.getAsignatura(nombre).getProfesor().setAsignatura(sa.getAsignatura(nombre));
                   }
@@ -475,7 +461,7 @@ public class Interface {
                 ArrayList<Asignatura> asig = sa.getAsignaturas();
                 if (asig.size() != 0) {
                   for (int i = 0; i < asig.size(); i++) {
-                    if (!asig.get(i).getCalificaciones().getNotas().isEmpty()) {
+                    if (!asig.get(i).getNotas().isEmpty()) {
                       System.out.println(asig.get(i).mostrarNotas() + "\n");
                     } else {
                       System.out.println("\nNO TIENES NINGUNA NOTA");
@@ -568,7 +554,7 @@ public class Interface {
             System.out.println(
                 "\n====HORARIOS====\n[0] MOSTRAR HORARIO DE CLASES\n[1] MOSTRAR HORARIO DE ASESORIAS\n[9] VOLVER\n");
             comando1 = Integer.parseInt(br.readLine());
-            String[] days = { "lunes", "martes", "miercoles", "jueves", "viernes","sabado" };
+            String[] days = { "lunes", "martes", "miercoles", "jueves", "viernes", "sabado" };
 
             switch (comando1) {
               case 0:
@@ -592,10 +578,10 @@ public class Interface {
                 break;
 
               case 1:
-                if (!sa.profesores().isEmpty()) {
+                if (!Semestre.profesores.isEmpty()) {
                   for (String day : days) {
                     System.out.println(day.toUpperCase() + "\n");
-                    ArrayList<Profesor> p = sa.profesores();
+                    ArrayList<Profesor> p = Semestre.profesores;
                     for (int i = 0; i < p.size(); i++) {
                       Horario h = p.get(i).getHorario(day);
                       if (h != null) {
@@ -622,9 +608,9 @@ public class Interface {
             switch (comando1) {
               case 0:
                 System.out.println(sa.getNombre());
-                if (!sa.profesores().isEmpty()) {
-                  for (int i = 0; i < sa.profesores().size(); i++) {
-                    System.out.println(sa.profesores().get(i).toString() + "\n");
+                if (!Semestre.profesores.isEmpty()) {
+                  for (int i = 0; i < Semestre.profesores.size(); i++) {
+                    System.out.println(Semestre.profesores.get(i).toString() + "\n");
                   }
                 } else {
                   System.out.println("\nNO TIENES NINGUN PROFESOR\n");
@@ -654,9 +640,9 @@ public class Interface {
                       System.out.println("\nDETALLES: ");
                       det = br.readLine();
                       if (asignatura != null) {
-                        new Profesor(nombre, correo, det, asignatura, sa);
+                        new Profesor(nombre, correo, det, asignatura);
                       } else {
-                        new Profesor(nombre, correo, det, null, sa);
+                        new Profesor(nombre, correo, det, null);
                       }
                       System.out.println("\nPROFESOR CREADO\n");
                       System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
@@ -667,13 +653,13 @@ public class Interface {
                       System.out.println("\nNOMBRE DEL PROFESOR QUE DESEA BORRAR: ");
                       nombre = br.readLine();
                       aux = false;
-                      for (int i = 0; i < sa.profesores().size(); i++) {
-                        Profesor p = sa.profesores().get(i);
+                      for (int i = 0; i < Semestre.profesores.size(); i++) {
+                        Profesor p = Semestre.profesores.get(i);
                         if (p.getNombre().equalsIgnoreCase(nombre) || p.getNombre().indexOf(nombre) >= 0) {
                           if (p.getAsignatura() != null) {
                             p.getAsignatura().setProfesor(null);
                           }
-                          sa.profesores().remove(i);
+                          Semestre.profesores.remove(i);
                           System.out.println("\nPROFESOR BORRADO\n");
                           aux = true;
                           break;
@@ -689,7 +675,7 @@ public class Interface {
                     case 2:
                       System.out.println("\n===MODIFICAR PROFESOR===\nNOMBRE DEL PROFESOR QUE DESEA MODIFICAR: ");
                       nombre = br.readLine();
-                      Profesor p = Profesor.Buscar(nombre, sa);
+                      Profesor p = Profesor.Buscar(nombre);
                       if (p == null) {
                         System.out.println("\nESTE PROFESOR NO SE ENCUENTRA\n");
                         System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
@@ -815,7 +801,7 @@ public class Interface {
                 break;
 
             }
-          }
+          } // fin menu semestre
 
       }
     }

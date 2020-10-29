@@ -1,7 +1,10 @@
 package gestorAplicacion;
 
 import java.io.Serializable;
-
+/**
+ * Clase que representa un tipo de dato
+ * 
+ */
 public class Nota implements Serializable{
   private float porcentaje;
   private float calificaciones;

@@ -4,25 +4,25 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Profesor extends Persona implements Serializable {
-  private ArrayList<Horario> asesoria = new ArrayList<>();
+  private ArrayList<Horario> asesoria = new ArrayList<>(); //Lista de horarios en los que el profesor puede atender.
   private Asignatura asignatura;
   private String detalles;
 
-  public Profesor(Semestre semestre) {
-    semestre.profesores().add(this);
+  public Profesor() {
+    Semestre.profesores.add(this);
   }
 
-  public Profesor(String nombre, String correo, String detalles, Asignatura asignatura, Semestre semestre) {
+  public Profesor(String nombre, String correo, String detalles, Asignatura asignatura) {
     this.nombre = nombre;
     this.correo = correo;
     this.detalles = detalles;
     this.asignatura = asignatura;
-    semestre.profesores().add(this);
+    Semestre.profesores.add(this);
   }
 
-  public Profesor(String nombre, Semestre semestre) {
+  public Profesor(String nombre) {
     this.nombre = nombre;
-    semestre.profesores().add(this);
+    Semestre.profesores.add(this);
   }
 
   public void setAsignatura(Asignatura asignatura) {
@@ -58,16 +58,24 @@ public class Profesor extends Persona implements Serializable {
     return null;
   }
 
-  public static Profesor Buscar(String nombre, Semestre s) {
-    for (int i = 0; i < s.profesores().size(); i++) {
-      Profesor p = s.profesores().get(i);
+  /**
+   * Busca un profesor en la lista de profesores de los semestres.
+   * @param nombre Nombre del profesor
+   * @return Si existe el objeto, devuelve el objeto Profesor correspondiente. En caso contrario, devuelve <b>null</b>
+   */
+  public static Profesor Buscar(String nombre) {
+    for (int i = 0; i < Semestre.profesores.size(); i++) {
+      Profesor p = Semestre.profesores.get(i);
       if (p.getNombre().equalsIgnoreCase(nombre)) {
         return p;
       }
     }
     return null;
   }
-
+  /**
+   * Información del profesor.
+   * @return Información básica del profesor (Nombre, Correo, Asignatura, Detalles)
+   */
   public String toString() {
     String comp = "NOMBRE: " + this.nombre + "\n" + "CORREO: " + this.correo + "\n" + "ASIGNATURA: ";
     if (this.asignatura != null) {

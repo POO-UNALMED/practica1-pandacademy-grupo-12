@@ -4,21 +4,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+// Clase que representa el semestre, guarda e implementa sus metodos correspondientes como el promedio academico
+
 public class Semestre implements Serializable, Comparable<Semestre> {
 
 	private String nombre;
-	private static ArrayList<Profesor> profesores = new ArrayList<>();
-	private ArrayList<Asignatura> asignaturas = new ArrayList<>();
-	private ArrayList<Horario> horarios = new ArrayList<>();
+	public static ArrayList<Profesor> profesores = new ArrayList<>();  // lista que guarda los profesores 	de cada semestre
+	private ArrayList<Asignatura> asignaturas = new ArrayList<>(); // lista que guarda las asignaturas de cada semestre
+	private ArrayList<Horario> horarios = new ArrayList<>(); // lista que guarda todos los horarios de cada semestre;
 
 	public Semestre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Semestre() {
-	}
 
-	public ArrayList<Profesor> profesores() {
-		return profesores;
+	public Semestre() {
 	}
 
 	public void setprofesores(ArrayList<Profesor> p) {
@@ -32,45 +31,51 @@ public class Semestre implements Serializable, Comparable<Semestre> {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	public ArrayList<Horario> getHorarios(Asignatura asg){
+
+	public ArrayList<Horario> getHorarios(Asignatura asg) {
 		ArrayList<Horario> horarios = new ArrayList<>();
-		for(Horario horario : this.horarios){
-			if(horario.getAsignatura()==asg){
+		for (Horario horario : this.horarios) {
+			if (horario.getAsignatura() == asg) {
 				horarios.add(horario);
 			}
 		}
 		return horarios;
 	}
 
+	/**
+	 * Calcula el promedio académico del semestre.
+	 * @return Promedio del semestre (float)
+	 */
 	public float promedioSemetre() {
 		float p = 0;
 		int c = 0;
-		for (int i = 0; i < asignaturas.size(); i++) {
-			Asignatura m = asignaturas.get(i);
-			p = +m.promedioAsignatura() * m.getCreditos();
-			c = +m.getCreditos();
+		for (Asignatura asg : asignaturas) {
+			p += asg.promedio();
+			c += asg.getCreditos();
 		}
-		try { 
+		if (c > 0) {
 			return p / c;
 		}
-		catch (Exception e) {
-			return 0;
-		}
+		return 0;
 	}
-		
-
+	/**
+	 * Devuelve la cantidad de créditos aprobados en el semestre.
+	 * @return Créditos aprobados (int)
+	 */
 	public int creditosAprobados() {
 		int total = 0;
 		for (Asignatura asignatura : asignaturas) {
-			if (asignatura.getCalificaciones().promedio() >= 3) {
+			if (asignatura.promedio() >= 3) {
 				total += asignatura.getCreditos();
 			}
 		}
 		return total;
 
 	}
-
+	/**
+	 * Devuelve el total de créditos cursados en el semestre.
+	 * @return Total de créditos del semestre (int)
+	 */
 	public int totalCreditos() {
 		int total = 0;
 		for (int i = 0; i < asignaturas.size(); i++) {
@@ -94,7 +99,11 @@ public class Semestre implements Serializable, Comparable<Semestre> {
 	public ArrayList<Asignatura> getAsignaturas() {
 		return asignaturas;
 	}
-
+	/**
+	 * Busca una asignatura en el semestre por medio del nombre.
+	 * @param nombre Nombre de la asignatura
+	 * @return Objeto Asignatura
+	 */
 	public Asignatura getAsignatura(String nombre) {
 		for (int i = 0; i < asignaturas.size(); i++) {
 			Asignatura m = asignaturas.get(i);

@@ -1,14 +1,17 @@
 package gestorAplicacion;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Clase que representa las asignaturas del programa.
+ * @author Cristian Londoño
+ */
+
 public class Asignatura implements Serializable, Calificacion {
-  public static ArrayList<Asignatura> asignaturas = new ArrayList<>();
   private int creditos;
   private String nombre;
   private Profesor profesor;
-  private ArrayList<Nota> notas=new ArrayList<Nota>();
+  private ArrayList<Nota> notas=new ArrayList<Nota>();   // Lista que guarda las notas de la asignatura
   private String detalles;
 
   // constructores
@@ -62,9 +65,14 @@ public class Asignatura implements Serializable, Calificacion {
     return this.detalles;
   }
 
+  /**
+   * Devuelve el estado de la asignatura.
+   * @return Aprobada o No aprobada, junto a la nota de la asignatura.
+   */
+
   public String estadoAsignatura() {
-    if (calificaciones != null) {
-      float nota = calificaciones.promedio();
+    if (!notas.isEmpty()) {
+      float nota = this.promedio();
       if (nota >= 3.0) {
         return "Aprobada " + String.valueOf(nota);
       } else {
@@ -74,32 +82,32 @@ public class Asignatura implements Serializable, Calificacion {
     return "No aprobada 0.0";
   }
 
+  /**
+   * Muestra una lista de todas las notas de la asignatura.
+   * @return Nombre y notas de la asignatura
+   */
   public String mostrarNotas() {
     String comp = "Tus notas de " + this.nombre + " son:\n";
-    ArrayList<Nota> n = this.getCalificaciones().getNotas();
-    for (int i = 0; i < n.size(); i++) {
-      comp = comp + n.get(i).getNota() + " "; // imprime una lista de todas las notas
+    for (int i = 0; i < notas.size(); i++) {
+      comp = comp + notas.get(i).getNota() + " ";
     }
     return comp;
   }
 
-  public float promedioAsignatura() {
-    Calificacion n = this.getCalificaciones();
-    return n.promedio();
-  }
 
-@Override
 public void agregarNota(Nota nota) {
-	// TODO Auto-generated method stub
-	
+	notas.add(nota);	
 }
 
 @Override
 public ArrayList<Nota> getNotas() {
-	// TODO Auto-generated method stub
-	return null;
+	return notas;
 }
 
+/**
+ * Calcula el promedio de la asignatura.
+ * @return Promedio de la asignatura
+ */
 @Override
 public float promedio() {
 	float cont = 0;
