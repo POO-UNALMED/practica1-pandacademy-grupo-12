@@ -48,13 +48,15 @@ public class Estudiante extends Persona implements Serializable {
     int cap = 0;
     if (creditosR > 0) {
       for (Semestre semestre : semestres) {
-        cap += semestre.creditosAprobados();
-        System.out.println(cap);
+        cap += semestre.creditosAprobados();       
       }
       avance = (float) cap/creditosR;
-      System.out.println(avance);
       return Math.round(avance*100);
     }
     return (int) avance;
+	}
+
+public Horario getHorario( Semestre sem, int i ) {
+	return sem.getHorario(i);
 	}
 }

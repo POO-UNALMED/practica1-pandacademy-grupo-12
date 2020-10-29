@@ -22,9 +22,10 @@ public class Deserialization {
 			ObjectInputStream o = new ObjectInputStream(f);
 
 			est = (Estudiante) o.readObject();
-
+			o.close();
+			f.close();
 			return est;
-
+						
 		} catch (ClassNotFoundException e) {
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {

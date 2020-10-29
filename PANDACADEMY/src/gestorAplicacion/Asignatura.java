@@ -3,12 +3,12 @@ package gestorAplicacion;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Asignatura implements Serializable {
+public class Asignatura implements Serializable, Calificacion {
   public static ArrayList<Asignatura> asignaturas = new ArrayList<>();
   private int creditos;
   private String nombre;
   private Profesor profesor;
-  private Calificacion calificaciones;
+  private ArrayList<Nota> notas=new ArrayList<Nota>();
   private String detalles;
 
   // constructores
@@ -20,14 +20,12 @@ public class Asignatura implements Serializable {
     this.nombre = nombre;
     this.profesor = p;
     this.detalles = det;
-    calificaciones = new Calificacion();
   }
 
   public Asignatura(int creditos, String nombre, String det) {
     this.creditos = creditos;
     this.nombre = nombre;
     this.detalles = det;
-    calificaciones = new Calificacion();
   }
 
   // metodos get y set
@@ -55,13 +53,6 @@ public class Asignatura implements Serializable {
     return this.profesor;
   }
 
-  public void setCalificaciones(Calificacion n) {
-    this.calificaciones = n;
-  }
-
-  public Calificacion getCalificaciones() {
-    return this.calificaciones;
-  }
 
   public void setDetalles(String text) {
     this.detalles = text;
@@ -96,4 +87,26 @@ public class Asignatura implements Serializable {
     Calificacion n = this.getCalificaciones();
     return n.promedio();
   }
+
+@Override
+public void agregarNota(Nota nota) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public ArrayList<Nota> getNotas() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public float promedio() {
+	float cont = 0;
+	for (int i = 0; i < notas.size(); i++) {
+	  cont = cont + (notas.get(i).getNota() * notas.get(i).getPorcentaje());
+	}
+	return cont;
+
+	}
 }

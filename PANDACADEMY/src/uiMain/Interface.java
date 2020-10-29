@@ -201,11 +201,33 @@ public class Interface {
                               break;
 
                             case 1:
-                              System.out.println("INGRESE NOTA: \n");
-                              float nota = Float.parseFloat(br.readLine());
-                              System.out.println("INGRESE PORCENTAJE(%): ");
-                              float porc = Float.parseFloat(br.readLine()) / 100;
-                              asg.getCalificaciones().getNotas().add(new Nota(porc, nota));
+                            
+                            	boolean au=true;
+                            	while (au) {
+	                              System.out.println("INGRESE NOTA: \n");
+	                              float nota = Float.parseFloat(br.readLine());
+	                              
+	                              
+	                              
+	                              System.out.println("INGRESE PORCENTAJE(%): ");
+	                              float porc = Float.parseFloat(br.readLine()) / 100;
+	                              
+	                              float c=0;
+	                              for (int i=0; i< asg.getCalificaciones().getNotas().size();i++) {
+	                            	  c= c + asg.getCalificaciones().getNotas().get(i).getPorcentaje();
+	                              }
+	                              if ( (c+porc)<=1 ) {
+	                            	  asg.getCalificaciones().getNotas().add(new Nota(porc, nota));
+	                            	  au=false;
+	                              }
+	                              else {
+	                            	  System.out.println("INGRESE UN PORCENTAJE VALIDO\n");
+	                                  System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
+	                                  br.readLine();
+	                              }
+	                              
+                            	}
+                                                               
                               System.out.println("PRESIONE <ENTER> PARA CONTINUAR");
                               br.readLine();
                               break;
@@ -228,13 +250,13 @@ public class Interface {
                         break;
                       case 4:
                         int hEdit;
-                        ArrayList<Horario> h = sa.getHorarios();
+                        ArrayList<Horario> h = sa.getHorarios(asg);
                         if (!h.isEmpty()) {
                           for (int i = 0; i < h.size(); i++) {
                             System.out.println("\n[" + i + "]");
                             System.out.println(h.get(i).toString());
                           }
-                          System.out.println("\n[0] BORRAR HORARIO\n[1] CAMBIAR HORARIO\n[2] NUEVO HORARIO");
+                          System.out.println("\n[0] BORRAR HORARIO\n[1] CAMBIAR HORARIO\n[2] NUEVO HORARIO\n[9] SALIR");
                           comando3 = Integer.parseInt(br.readLine());
                           switch (comando3) {
                             case 0:
@@ -295,6 +317,9 @@ public class Interface {
                                 br.readLine();
                               }
                               break;
+                              
+                            case 9:
+                            	break;
 
                           }
                         } else {
@@ -543,7 +568,7 @@ public class Interface {
             System.out.println(
                 "\n====HORARIOS====\n[0] MOSTRAR HORARIO DE CLASES\n[1] MOSTRAR HORARIO DE ASESORIAS\n[9] VOLVER\n");
             comando1 = Integer.parseInt(br.readLine());
-            String[] days = { "lunes", "martes", "miercoles", "jueves", "viernes" };
+            String[] days = { "lunes", "martes", "miercoles", "jueves", "viernes","sabado" };
 
             switch (comando1) {
               case 0:

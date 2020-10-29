@@ -45,5 +45,8 @@ public class Horario implements Serializable {
     String horario = dia + "\n" + horaInicio + "\n" + horaFinal;
     return horario;
   }
+  public Asignatura getAsignatura() {
+	  return this.asignatura;
+  }
 
 }

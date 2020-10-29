@@ -6,7 +6,9 @@ public abstract class Persona implements Serializable {
   protected long dni;
   protected String nombre;
   protected String correo;
-
+  
+  abstract public Horario getHorario();
+  
   public String getCorreo() {
     return correo;
   }

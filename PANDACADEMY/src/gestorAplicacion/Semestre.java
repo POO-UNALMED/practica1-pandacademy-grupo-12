@@ -14,7 +14,6 @@ public class Semestre implements Serializable, Comparable<Semestre> {
 	public Semestre(String nombre) {
 		this.nombre = nombre;
 	}
-
 	public Semestre() {
 	}
 
@@ -33,6 +32,16 @@ public class Semestre implements Serializable, Comparable<Semestre> {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public ArrayList<Horario> getHorarios(Asignatura asg){
+		ArrayList<Horario> horarios = new ArrayList<>();
+		for(Horario horario : this.horarios){
+			if(horario.getAsignatura()==asg){
+				horarios.add(horario);
+			}
+		}
+		return horarios;
+	}
 
 	public float promedioSemetre() {
 		float p = 0;
@@ -42,8 +51,14 @@ public class Semestre implements Serializable, Comparable<Semestre> {
 			p = +m.promedioAsignatura() * m.getCreditos();
 			c = +m.getCreditos();
 		}
-		return p / c;
+		try { 
+			return p / c;
+		}
+		catch (Exception e) {
+			return 0;
+		}
 	}
+		
 
 	public int creditosAprobados() {
 		int total = 0;

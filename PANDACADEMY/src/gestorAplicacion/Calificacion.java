@@ -3,24 +3,11 @@ package gestorAplicacion;
 import java.io.Serializable;
 import java.util.*;
 
-public class Calificacion implements Serializable{
-  private ArrayList<Nota> notas = new ArrayList<Nota>();
+public interface Calificacion{
 
-  public Calificacion() {}
+  public abstract void agregarNota(Nota nota);
 
-  public void agregarNota(Nota nota) {
-    this.notas.add(nota);
-  }
-
-  public ArrayList<Nota> getNotas() {
-    return notas;
-  }
-
-  public float promedio() {
-    float cont = 0;
-    for (int i = 0; i < notas.size(); i++) {
-      cont = cont + (notas.get(i).getNota() * notas.get(i).getPorcentaje());
-    }
-    return cont;
-  }
+  public abstract ArrayList<Nota> getNotas();
+  
+  public abstract float promedio();
 }
