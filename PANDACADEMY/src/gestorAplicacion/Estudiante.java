@@ -44,11 +44,13 @@ public class Estudiante extends Persona implements Serializable {
   */
   public float getPAPA() {
     float total = 0;
+    int totalC=0;
     for (int i = 0; i < semestres.size(); i++) {
       Semestre s = semestres.get(i);
       total += s.promedioSemetre();
+      totalC += s.totalCreditos();
     }
-    total /= semestres.size();
+    total /= totalC;
     return total;
   }
 

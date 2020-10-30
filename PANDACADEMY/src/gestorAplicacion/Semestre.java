@@ -42,19 +42,15 @@ public class Semestre implements Serializable, Comparable<Semestre> {
 		return horarios;
 	}
 
-	/**
-	 * Calcula el promedio académico del semestre.
-	 * @return Promedio del semestre (float)
-	 */
 	public float promedioSemetre() {
 		float p = 0;
 		int c = 0;
 		for (Asignatura asg : asignaturas) {
-			p += asg.promedio();
+			p += asg.promedio()*asg.getCreditos();
 			c += asg.getCreditos();
 		}
 		if (c > 0) {
-			return p / c;
+			return p;
 		}
 		return 0;
 	}
