@@ -1,7 +1,6 @@
 package BaseDatos;
-import gestorAplicacion.*;
+import gestorAplicacion.Persona.Estudiante;
 
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

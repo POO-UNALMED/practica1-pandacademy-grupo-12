@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import BaseDatos.*;
-import gestorAplicacion.*;
+import gestorAplicacion.Academico.*;
+import gestorAplicacion.Persona.*;
+import gestorAplicacion.Horario;
 
 /**
  * @ Cristian Londoño

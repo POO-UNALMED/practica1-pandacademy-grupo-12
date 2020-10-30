@@ -1,6 +1,9 @@
-package gestorAplicacion;
+package gestorAplicacion.Academico;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import gestorAplicacion.Persona.Profesor;
 
 /**
  * Clase que representa las asignaturas del programa.

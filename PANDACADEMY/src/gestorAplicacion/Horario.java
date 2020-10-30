@@ -1,6 +1,8 @@
 package gestorAplicacion;
 
 import java.io.Serializable;
+
+import gestorAplicacion.Academico.Asignatura;
 /**
  * Objecto que representa un horario y guarda sus datos relevantes para su uso
  * 

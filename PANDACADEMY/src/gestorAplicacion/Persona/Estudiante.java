@@ -1,7 +1,9 @@
-package gestorAplicacion;
+package gestorAplicacion.Persona;
 
 import java.io.Serializable;
 import java.util.*;
+
+import gestorAplicacion.Academico.Semestre;
 
 
 public class Estudiante extends Persona implements Serializable {

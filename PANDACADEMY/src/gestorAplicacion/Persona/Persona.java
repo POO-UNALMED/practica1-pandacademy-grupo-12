@@ -1,4 +1,4 @@
-package gestorAplicacion;
+package gestorAplicacion.Persona;
 
 import java.io.Serializable;
 

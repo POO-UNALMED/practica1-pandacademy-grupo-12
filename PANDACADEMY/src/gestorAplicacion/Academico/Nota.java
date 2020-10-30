@@ -1,4 +1,4 @@
-package gestorAplicacion;
+package gestorAplicacion.Academico;
 
 import java.io.Serializable;
 /**

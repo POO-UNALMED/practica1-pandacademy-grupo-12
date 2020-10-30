@@ -1,8 +1,11 @@
-package gestorAplicacion;
+package gestorAplicacion.Academico;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import gestorAplicacion.Horario;
+import gestorAplicacion.Persona.Profesor;
 
 // Clase que representa el semestre, guarda e implementa sus metodos correspondientes como el promedio academico
 

@@ -1,7 +1,10 @@
-package gestorAplicacion;
+package gestorAplicacion.Persona;
 
 import java.io.Serializable;
 import java.util.*;
+
+import gestorAplicacion.Horario;
+import gestorAplicacion.Academico.*;
 
 public class Profesor extends Persona implements Serializable {
   private ArrayList<Horario> asesoria = new ArrayList<>(); //Lista de horarios en los que el profesor puede atender.
