@@ -22,10 +22,8 @@ public class Asignatura implements Serializable, Calificacion {
   }
 
   public Asignatura(int creditos, String nombre, Profesor p, String det) {
-    this.creditos = creditos;
-    this.nombre = nombre;
+	this(creditos, nombre, det);
     this.profesor = p;
-    this.detalles = det;
   }
 
   public Asignatura(int creditos, String nombre, String det) {

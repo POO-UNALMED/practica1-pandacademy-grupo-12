@@ -16,7 +16,7 @@ public class Profesor extends Persona implements Serializable {
   }
 
   public Profesor(String nombre, String correo, String detalles, Asignatura asignatura) {
-    this.nombre = nombre;
+	this(nombre);
     this.correo = correo;
     this.detalles = detalles;
     this.asignatura = asignatura;
