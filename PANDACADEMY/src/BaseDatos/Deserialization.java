@@ -1,4 +1,6 @@
 package BaseDatos;
+import gestorAplicacion.Academico.Semestre;
+import gestorAplicacion.Persona.Estudiante;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +20,7 @@ public class Deserialization {
 			ObjectInputStream o = new ObjectInputStream(f);
 
 			est = (Estudiante) o.readObject();
+			Semestre.profesores = est.getProfesores();
 			o.close();
 			f.close();
 			return est;
