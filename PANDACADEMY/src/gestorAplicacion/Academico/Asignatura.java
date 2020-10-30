@@ -1,15 +1,20 @@
-package gestorAplicacion;
+package gestorAplicacion.Academico;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Asignatura implements Serializable {
-  public static ArrayList<Asignatura> asignaturas = new ArrayList<>();
+import gestorAplicacion.Persona.Profesor;
+
+/**
+ * Clase que representa las asignaturas del programa.
+ * @author Cristian Londoño
+ */
+
+public class Asignatura implements Serializable, Calificacion {
   private int creditos;
   private String nombre;
   private Profesor profesor;
-  private Calificacion calificaciones;
-  private ArrayList<Horario> horarios = new ArrayList<>();
+  private ArrayList<Nota> notas=new ArrayList<Nota>();   // Lista que guarda las notas de la asignatura
   private String detalles;
 
   // constructores
@@ -21,14 +26,12 @@ public class Asignatura implements Serializable {
     this.nombre = nombre;
     this.profesor = p;
     this.detalles = det;
-    calificaciones = new Calificacion();
   }
 
   public Asignatura(int creditos, String nombre, String det) {
     this.creditos = creditos;
     this.nombre = nombre;
     this.detalles = det;
-    calificaciones = new Calificacion();
   }
 
   // metodos get y set
@@ -56,29 +59,6 @@ public class Asignatura implements Serializable {
     return this.profesor;
   }
 
-  public void setCalificaciones(Calificacion n) {
-    this.calificaciones = n;
-  }
-
-  public Calificacion getCalificaciones() {
-    return this.calificaciones;
-  }
-
-  public void setHorario(ArrayList<Horario> h) {
-    this.horarios = h;
-  }
-
-  public void addHorario(Horario h) {
-    this.horarios.add(h);
-  }
-
-  public ArrayList<Horario> getHorarios() {
-    return this.horarios;
-  }
-
-  public Horario getHorario(int i) {
-    return this.horarios.get(i);
-  }
 
   public void setDetalles(String text) {
     this.detalles = text;
@@ -88,9 +68,14 @@ public class Asignatura implements Serializable {
     return this.detalles;
   }
 
+  /**
+   * Devuelve el estado de la asignatura.
+   * @return Aprobada o No aprobada, junto a la nota de la asignatura.
+   */
+
   public String estadoAsignatura() {
-    if (calificaciones != null) {
-      float nota = calificaciones.promedio();
+    if (!notas.isEmpty()) {
+      float nota = this.promedio();
       if (nota >= 3.0) {
         return "Aprobada " + String.valueOf(nota);
       } else {
@@ -100,25 +85,39 @@ public class Asignatura implements Serializable {
     return "No aprobada 0.0";
   }
 
+  /**
+   * Muestra una lista de todas las notas de la asignatura.
+   * @return Nombre y notas de la asignatura
+   */
   public String mostrarNotas() {
     String comp = "Tus notas de " + this.nombre + " son:\n";
-    ArrayList<Nota> n = this.getCalificaciones().getNotas();
-    for (int i = 0; i < n.size(); i++) {
-      comp = comp + n.get(i).getNota() + " "; // imprime una lista de todas las notas
+    for (int i = 0; i < notas.size(); i++) {
+      comp = comp + notas.get(i).getNota() + " ";
     }
     return comp;
   }
 
-  public float promedioAsignatura() {
-    Calificacion n = this.getCalificaciones();
-    return n.promedio();
-  }
 
-  public String mostrarHorario() {
-    String comp = "";
-    for (int i = 0; i < this.getHorarios().size(); i++) {
-      comp = comp + this.getHorario(i).toString() + "\n";
-    }
-    return comp;
-  }
+public void agregarNota(Nota nota) {
+	notas.add(nota);	
+}
+
+@Override
+public ArrayList<Nota> getNotas() {
+	return notas;
+}
+
+/**
+ * Calcula el promedio de la asignatura.
+ * @return Promedio de la asignatura
+ */
+@Override
+public float promedio() {
+	float cont = 0;
+	for (int i = 0; i < notas.size(); i++) {
+	  cont = cont + (notas.get(i).getNota() * notas.get(i).getPorcentaje());
+	}
+	return cont;
+
+	}
 }

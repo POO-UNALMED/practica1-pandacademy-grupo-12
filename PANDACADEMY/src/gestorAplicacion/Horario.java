@@ -2,13 +2,26 @@ package gestorAplicacion;
 
 import java.io.Serializable;
 
-public class Horario implements Serializable{
+import gestorAplicacion.Academico.Asignatura;
+/**
+ * Objecto que representa un horario y guarda sus datos relevantes para su uso
+ * 
+ */
+public class Horario implements Serializable {
   private String dia, horaInicio, horaFinal;
+  private Asignatura asignatura;
 
   public Horario(String d, String i, String f) {
-    this.dia = d;
-    this.horaFinal = f;
-    this.horaInicio = i;
+    dia = d;
+    horaFinal = f;
+    horaInicio = i;
+  }
+
+  public Horario(String d, String i, String f, Asignatura asg) {
+    dia = d;
+    horaFinal = f;
+    horaInicio = i;
+    asignatura = asg;
   }
 
   public String getDia() {
@@ -23,14 +36,16 @@ public class Horario implements Serializable{
     return this.horaFinal;
   }
 
-  public int getHoras() {
-    int inicio = Integer.parseInt(this.horaInicio.substring(0, 1));
-    int fin = Integer.parseInt(this.horaFinal.substring(0, 1));
-    return fin - inicio;
+  public String getAsignatString() {
+    return this.asignatura.getNombre();
   }
 
   public String toString() {
     String horario = dia + "\n" + horaInicio + "\n" + horaFinal;
     return horario;
   }
+  public Asignatura getAsignatura() {
+	  return this.asignatura;
+  }
+
 }
