@@ -14,7 +14,7 @@ public class Deserialization {
 	public static Estudiante deserializarE() {
 		Estudiante est;
 		try {
-			FileInputStream f = new FileInputStream(archivo.getAbsolutePath()+"\\src\\BaseDatos\\persona.txt");
+			FileInputStream f = new FileInputStream(archivo.getAbsolutePath()+"\\src\\BaseDatos\\temp\\estudiante.txt");
 			ObjectInputStream o = new ObjectInputStream(f);
 
 			est = (Estudiante) o.readObject();
