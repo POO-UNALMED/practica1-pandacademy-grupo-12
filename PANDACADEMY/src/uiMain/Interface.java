@@ -11,8 +11,7 @@ import gestorAplicacion.Persona.*;
 import gestorAplicacion.Horario;
 
 /**
- * @ Cristian Londoño
- * @ Juan Pablo Gutierrez
+ * @ Cristian Londoño @ Juan Pablo Gutierrez
  */
 public class Interface {
   public static void main(String[] args) throws IOException {
@@ -380,6 +379,7 @@ public class Interface {
                   for (int i = 0; i < sa.getAsignaturas().size(); i++) {
                     if (sa.getAsignatura(i).getNombre().equalsIgnoreCase(nombre)) {
                       System.out.println("\nESTA ASIGNATURA YA ESTA CREADA\n");
+                      aux = false;
                       break;
                     }
                   }
@@ -391,31 +391,32 @@ public class Interface {
                     sa.addAsignatura(asg);
                     sa.getAsignatura(nombre).getProfesor().setAsignatura(sa.getAsignatura(nombre));
                   }
-
-                  System.out.println("\nINGRESE NUMERO DE CLASES SEMANALES:   ");
-                  int j = Integer.parseInt(br.readLine());
-                  for (int i = 0; i < j; i++) {
-                    System.out.println("\n==NUEVO HORARIO==\nDIA: ");
-                    dia = br.readLine();
-                    System.out.println("\nHORA INICIO(HH:MM): ");
-                    h1 = br.readLine();
-                    System.out.println("\nHORA FINAL(HH:MM): ");
-                    h2 = br.readLine();
-                    aux = true;
-                    String comp = dia + "\n" + h1 + "\n" + h2;
-                    for (int k = 0; k < sa.getHorarios().size(); k++) {
-                      if (sa.getHorario(k).toString().equals(comp)) {
-                        aux = false;
+                  if (aux) {
+                    System.out.println("\nINGRESE NUMERO DE CLASES SEMANALES:   ");
+                    int j = Integer.parseInt(br.readLine());
+                    for (int i = 0; i < j; i++) {
+                      System.out.println("\n==NUEVO HORARIO==\nDIA: ");
+                      dia = br.readLine();
+                      System.out.println("\nHORA INICIO(HH:MM): ");
+                      h1 = br.readLine();
+                      System.out.println("\nHORA FINAL(HH:MM): ");
+                      h2 = br.readLine();
+                      aux = true;
+                      String comp = dia + "\n" + h1 + "\n" + h2;
+                      for (int k = 0; k < sa.getHorarios().size(); k++) {
+                        if (sa.getHorario(k).toString().equals(comp)) {
+                          aux = false;
+                        }
                       }
-                    }
-                    if (aux) {
-                      sa.addHorario(new Horario(dia, h1, h2, asg));
-                      System.out.println("\nHORARIO AGREGADO\nPRESIONE <ENTER> PARA CONTINUAR");
-                      br.readLine();
-                    } else {
-                      System.out.println("\nHORARIO NO VALIDO\nPRESIONE <ENTER> PARA CONTINUAR");
-                      br.readLine();
-                      i--;
+                      if (aux) {
+                        sa.addHorario(new Horario(dia, h1, h2, asg));
+                        System.out.println("\nHORARIO AGREGADO\nPRESIONE <ENTER> PARA CONTINUAR");
+                        br.readLine();
+                      } else {
+                        System.out.println("\nHORARIO NO VALIDO\nPRESIONE <ENTER> PARA CONTINUAR");
+                        br.readLine();
+                        i--;
+                      }
                     }
                   }
 
